@@ -1,15 +1,5 @@
 # Qm-Framework 1.0.1
 
-## 框架介绍
-
-### 帮助文档
-
-[**Qm-Framework Wiki**](https://github.com/starmcc/qm-framework/wiki)
-
-### 最新版本
-
-[**Show Version(Releases)**](https://github.com/starmcc/qm-framework/releases)
-
 ## Maven依赖库
 
 > 中央仓库查询：https://search.maven.org/
@@ -23,6 +13,59 @@
   <version>1.0.1</version>
 </dependency>
 ```
+
+## 框架说明
+
+### 帮助文档
+
+[**Qm-Framework Wiki**](https://github.com/starmcc/qm-framework/wiki)
+
+### 最新版本
+
+[**Show Version(Releases)**](https://github.com/starmcc/qm-framework/releases)
+
+
+## 架构介绍
+
+### 应用环境
+
+* java - JDK 1.8 以上
+* Maven 2.0 以上
+* SpringBoot 2.1.0 版本以上
+
+### 封存内容
+
+* Druid数据库连接池。
+
+  > 公认`Java`最友好的数据库连接池。
+
+* DBCP2数据库连接池。
+
+  > 小项目的常青树连接池。
+
+- Redis缓存客户端
+
+  > 直接调用`QmRedisClient`即可实现`key`、`value`的存储
+  >
+
+- 全局异常捕获返回JSON信息
+
+  > 在服务器发生任何错误都将返回规范化`JSON`格式的字符串。
+
+- 贯彻使用JSON数据传递
+
+  > 在`Controller`中继承`QmController`调用规定的方法。
+
+-  重写RequestBody实现AES双向对称加密数据技术
+
+  > 在请求时拦截，获取`body`参数并对其进行解密格式化，把格式化后的`body`原路放置。
+
+- RequestBody自定义注解@QmBody
+
+  > 在请求时对请求`body`中的`json`数据进行自动装配,在`controller`中参数列表可直接获取对应类型的参数。
+
+
+
 
 ## 关于作者
 
