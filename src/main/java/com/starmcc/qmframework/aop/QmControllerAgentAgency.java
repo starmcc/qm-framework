@@ -46,23 +46,6 @@ public class QmControllerAgentAgency {
         this.isPrintLogger = isPrintLogger;
     }
 
-    /**
-     * 获取QmResponseOut
-     *
-     * @return
-     */
-    private final static QmControllerAgent getQmOutMethod() {
-        try {
-            if (StringUtils.isEmpty(QmFrameConstants.LOGGER_AOP_EXTEND_CLASS) == false) {
-                return null;
-            }
-            return (QmControllerAgent) Class.forName(QmFrameConstants.LOGGER_AOP_EXTEND_CLASS).newInstance();
-        } catch (Exception e) {
-        }
-        return null;
-    }
-
-
 
     /**
      * 切入点范围

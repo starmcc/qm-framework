@@ -77,11 +77,6 @@ public class QmFrameConstants {
      * 系统容忍请求版本编号(默认允许当前版本)
      */
     public static final List<String> VERSION_ALLOWS = getVersionAllows();
-    /**
-     * 记录日志类路径
-     */
-    public static final String LOGGER_AOP_EXTEND_CLASS =
-            getProString("controller.aop.extend.class", null);
 
     /**
      * 获取特殊请求
