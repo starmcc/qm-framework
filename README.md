@@ -1,10 +1,12 @@
-# Qm-Framework 1.0.1
+# Qm-Framework 1.0.2
 
-## Maven依赖库
+## 1. Maven Warehouse
 
 > 中央仓库查询：https://search.maven.org/
 
 > 阿里仓库查询：https://maven.aliyun.com/mvn/search
+
+> Maven镜像仓库查询：https://mvnrepository.com/artifact/com.starmcc
 
 ```xml
 <dependency>
@@ -14,64 +16,60 @@
 </dependency>
 ```
 
-## 框架说明
+## 2. Preface
 
-### 帮助文档
+### *2.1 Help Document*
 
 [**Qm-Framework Wiki**](https://github.com/starmcc/qm-framework/wiki)
 
-### 最新版本
+### *2.2 Latest Version*
 
 [**Show Version(Releases)**](https://github.com/starmcc/qm-framework/releases)
 
+## 3. Environment
 
-## 架构介绍
+* java - JDK 1.8 above
+* Maven 2.0 above
+* SpringBoot 2.1.0 above
 
-### 应用环境
+## 4. Package Content
 
-* java - JDK 1.8 以上
-* Maven 2.0 以上
-* SpringBoot 2.1.0 版本以上
+4.1 Druid数据库连接池。
 
-### 封存内容
+> 公认`Java`最友好的数据库连接池。
 
-* Druid数据库连接池。
+4.2 DBCP2数据库连接池。
 
-  > 公认`Java`最友好的数据库连接池。
+> 小项目的常青树连接池。
 
-* DBCP2数据库连接池。
+4.3 Redis缓存客户端
 
-  > 小项目的常青树连接池。
+> 直接调用`QmRedisClient`即可实现`key`、`value`的存储
 
-- Redis缓存客户端
+4.4 全局异常捕获返回JSON信息
 
-  > 直接调用`QmRedisClient`即可实现`key`、`value`的存储
-  >
+> 在服务器发生任何错误都将返回规范化`JSON`格式的字符串。
 
-- 全局异常捕获返回JSON信息
+4.5 贯彻使用JSON数据传递
 
-  > 在服务器发生任何错误都将返回规范化`JSON`格式的字符串。
+> 在`Controller`中继承`QmController`调用规定的方法。
 
-- 贯彻使用JSON数据传递
+4.6 重写RequestBody实现AES双向对称加密技术
 
-  > 在`Controller`中继承`QmController`调用规定的方法。
+> 在请求时拦截，获取`body`参数并对其进行解密格式化，把格式化后的`body`原路放置。
 
--  重写RequestBody实现AES双向对称加密数据技术
+4.7 RequestBody自定义注解@QmBody
 
-  > 在请求时拦截，获取`body`参数并对其进行解密格式化，把格式化后的`body`原路放置。
-
-- RequestBody自定义注解@QmBody
-
-  > 在请求时对请求`body`中的`json`数据进行自动装配,在`controller`中参数列表可直接获取对应类型的参数。
+> 在请求时对请求`body`中的`json`数据进行自动装配,在`controller`中参数列表可直接获取对应类型的参数。
 
 
 
 
-## 关于作者
+## Author
 
 - 小生不才,黄阶后期,跪求各路高手路过指点迷津
-- 浅梦在此感谢各位的Star
+- 浅梦在此感谢各位的 Star
 - Email:starczt1992@163.com
 - 一个纯粹的Java农民
 
-> 指若下键万里行，如入浅梦醉逍遥
+> 指若下键万里行，如入浅梦醉逍遥。
