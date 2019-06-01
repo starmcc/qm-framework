@@ -28,8 +28,8 @@ public final class QmDataSourceFactory {
     /**
      * // 连接池类型
      */
-    private static String typeName = getProString("type-name", "dbcp2");
-    private static String driverClassName = getProString("driver-class-name", "com.mysql.jdbc.Driver");
+    private static String typeName = getProString("type-name", "druid");
+    private static String driverClassName = getProString("driver-class-name", "com.mysql.cj.jdbc.Driver");
     private static String url = getProString("url", "");
     private static String userName = getProString("username", "root");
     private static String password = getProString("password", "");

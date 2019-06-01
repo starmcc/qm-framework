@@ -67,12 +67,6 @@ public class InitFilter extends QmController implements Filter {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json;charset=utf-8");
-        // 以下是跨域设置
-        //response.setHeader("Access-Control-Allow-Origin", "*");
-        //response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
-        //response.setHeader("Access-Control-Max-Age", "3600");
-        //response.setHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type");
-        //response.setHeader("Access-Control-Allow-Credentials", "true");
     }
 
 

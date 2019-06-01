@@ -5,6 +5,7 @@ import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.starmcc.qmframework.body.JsonPathArgumentResolver;
 import com.starmcc.qmframework.filter.InitFilter;
+import com.starmcc.qmframework.tools.spring.QmSpringManager;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
@@ -60,6 +61,44 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
     }
 
     /**
+     * 初始化QmSpringManager
+     * @return
+     */
+    @Bean
+    public QmSpringManager initQmSpringManager() {
+        return new QmSpringManager();
+    }
+
+    /**
+     * 注入该DataSource
+     *
+     * @return 数据源
+     */
+    @Bean(destroyMethod = "close", initMethod = "init")
+    public DataSource settingDataSource() {
+        return QmDataSourceFactory.getDataSource();
+    }
+
+    /**
+     * 初始化过滤器
+     *
+     * @return FilterRegistrationBean
+     */
+    @Bean
+    public FilterRegistrationBean initFilter() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        //注入过滤器
+        registration.setFilter(new InitFilter());
+        //拦截规则
+        registration.addUrlPatterns("/*");
+        //过滤器名称
+        registration.setName("initFilter");
+        //过滤器顺序
+        registration.setOrder(1);
+        return registration;
+    }
+
+    /**
      * 跨域过滤器
      *
      * @return FilterRegistrationBean
@@ -84,25 +123,8 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
     }
 
     /**
-     * 初始化过滤器
-     * @return FilterRegistrationBean
-     */
-    @Bean
-    public FilterRegistrationBean initFilter() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        //注入过滤器
-        registration.setFilter(new InitFilter());
-        //拦截规则
-        registration.addUrlPatterns("/*");
-        //过滤器名称
-        registration.setName("initFilter");
-        //过滤器顺序
-        registration.setOrder(1);
-        return registration;
-    }
-
-    /**
      * 配置消息转换器--这里我用的是alibaba fastjson
+     *
      * @param converters
      */
     @Override
@@ -130,6 +152,7 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
 
     /**
      * QmBody自定义参数管理器
+     *
      * @param argumentResolvers
      */
     @Override
@@ -137,15 +160,5 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
         argumentResolvers.add(new JsonPathArgumentResolver());
     }
 
-    /**
-     * 注入该DataSource
-     *
-     * @return 数据源
-     */
-    @Bean(destroyMethod = "close", initMethod = "init")
-    public DataSource settingDataSource() {
-        DataSource dataSource = QmDataSourceFactory.getDataSource();
-        return dataSource;
-    }
 
 }
