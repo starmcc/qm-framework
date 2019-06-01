@@ -149,13 +149,4 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
         return dataSource;
     }
 
-    /**
-     * 注入AOP代理中心
-     * @return
-     */
-    @Bean
-    public QmControllerAgentAgency initQmMethodsAgentCentreLogger(){
-        return new QmControllerAgentAgency(true);
-    }
-
 }
