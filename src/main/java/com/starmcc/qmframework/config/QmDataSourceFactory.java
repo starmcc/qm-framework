@@ -4,11 +4,9 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.starmcc.qmframework.exception.QmFrameException;
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 
-import javax.sql.DataSource;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Properties;
