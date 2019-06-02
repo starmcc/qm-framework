@@ -4,6 +4,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.starmcc.qmframework.body.JsonPathArgumentResolver;
+import com.starmcc.qmframework.exception.QmFrameException;
 import com.starmcc.qmframework.filter.InitFilter;
 import com.starmcc.qmframework.tools.spring.QmSpringManager;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +64,7 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
 
     /**
      * 初始化QmSpringManager
+     *
      * @return
      */
     @Bean
@@ -74,9 +77,13 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
      *
      * @return 数据源
      */
-    @Bean(destroyMethod = "close", initMethod = "init")
+    @Bean(initMethod = "init", destroyMethod = "close")
     public DataSource settingDataSource() {
-        return QmDataSourceFactory.getDataSource();
+        try {
+            return (DataSource) QmDataSourceFactory.getDruidDataSource();
+        } catch (SQLException e) {
+            throw new QmFrameException("数据源配置异常!", e);
+        }
     }
 
     /**

@@ -28,7 +28,6 @@ public final class QmDataSourceFactory {
     /**
      * // 连接池类型
      */
-    private static String typeName = getProString("type-name", "druid");
     private static String driverClassName = getProString("driver-class-name", "com.mysql.cj.jdbc.Driver");
     private static String url = getProString("url", "");
     private static String userName = getProString("username", "root");
@@ -79,55 +78,13 @@ public final class QmDataSourceFactory {
         return filterFilterRegistrationBean;
     }
 
-
-    /**
-     * 构建一个datasource配置
-     */
-    public static DataSource getDataSource() {
-        DataSource dataSource = null;
-        final String[] typeFinal = {"druid", "dbcp2"};
-        try {
-            // if druid
-            if (typeFinal[0].equalsIgnoreCase(typeName)) {
-                dataSource = initDruidDataSource();
-                // if dbcp2
-            } else if (typeFinal[1].equalsIgnoreCase(typeName)) {
-                dataSource = initDbcp2DataSource();
-            } else {
-                dataSource = null;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return dataSource;
-    }
-
-    /**
-     * 配置dbcp2数据源
-     *
-     * @return
-     */
-    private final static BasicDataSource initDbcp2DataSource() {
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setDriverClassName(driverClassName);
-        basicDataSource.setUrl(url);
-        basicDataSource.setUsername(userName);
-        basicDataSource.setPassword(password);
-        basicDataSource.setMaxWaitMillis(getProInt("dbcp2.max-wait-millis", 10000));
-        basicDataSource.setMinIdle(getProInt("dbcp2.min-idle", 5));
-        basicDataSource.setInitialSize(getProInt("dbcp2.initial-size", 5));
-        basicDataSource.setValidationQuery(getProString("dbcp2.validation-query", "SELECT 1 FROM DUAL"));
-        basicDataSource.setConnectionProperties(getProString("dbcp2.connection-properties", "characterencoding=utf8"));
-        return basicDataSource;
-    }
-
     /**
      * 配置Druid数据源
      *
      * @return
      * @throws SQLException
      */
-    private final static DruidDataSource initDruidDataSource() throws SQLException {
+    public final static DruidDataSource getDruidDataSource() throws SQLException {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName(driverClassName);
         druidDataSource.setUrl(url);
@@ -148,7 +105,6 @@ public final class QmDataSourceFactory {
         druidDataSource.setFilters(getProString("druid.filters", "stat,wall"));
         druidDataSource.setConnectionProperties(getProString("druid.connectionProperties", "stat.mergeSql=true;stat.slowSqlMillis=5000"));
         druidDataSource.setUseGlobalDataSourceStat(getProBoolean("druid.useGlobalDataSourceStat", true));
-
         return druidDataSource;
     }
 
