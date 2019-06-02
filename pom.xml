@@ -25,8 +25,7 @@
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <httpclient.version>4.5.2</httpclient.version>
         <fastjson.version>1.2.47</fastjson.version>
-        <commons-dbcp2.version>2.1.1</commons-dbcp2.version>
-        <druid.version>1.0.26</druid.version>
+        <druid.version>1.1.10</druid.version>
         <commons-io.version>2.6</commons-io.version>
         <google-collections.version>1.0</google-collections.version>
         <commons-text.version>1.6</commons-text.version>
