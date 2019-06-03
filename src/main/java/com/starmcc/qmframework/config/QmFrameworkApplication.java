@@ -6,6 +6,7 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.starmcc.qmframework.body.JsonPathArgumentResolver;
 import com.starmcc.qmframework.exception.QmFrameException;
 import com.starmcc.qmframework.filter.InitFilter;
+import com.starmcc.qmframework.tools.file.FileUtil;
 import com.starmcc.qmframework.tools.spring.QmSpringManager;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -33,24 +34,14 @@ import java.util.List;
  */
 public class QmFrameworkApplication implements WebMvcConfigurer {
 
+
     /**
      * 项目启动时，只执行一次 Banner 打印
      */
     @PostConstruct
     private final void init() {
-        System.out.println("\n" +
-                "                  ____    __  __________  ___   __  _______\n" +
-                "                 / __ \\  /  |/  / __/ _ \\/ _ | /  |/  / __/\n" +
-                "                / /_/ / / /|_/ / _// , _/ __ |/ /|_/ / _/\n" +
-                "                \\___\\_\\/_/  /_/_/ /_/|_/_/ |_/_/  /_/___/\n" +
-                "         ________________________________________________________\n" +
-                "________| 浅梦:gitHub:https://github.com/starmcc                 |_______\n" +
-                "\\       | 邮箱:starczt1992@163.com                               |      /\n" +
-                " \\      | 开源:[https://github.com/starmcc/QMBoootFrame]         |     /\n" +
-                "  |     | 文档:[https://github.com/starmcc/QMBoootFrame/wiki]    |    |\n" +
-                " /      |________________________________________________________|    \\\n" +
-                "/__________)                                                 (_________\\\n" +
-                "                    指若下键万里行，如入浅梦醉逍遥；");
+        String bannerTxt = FileUtil.readByLines(this.getClass().getResource("banner.txt").getFile());
+        System.out.println(bannerTxt);
     }
 
     /**
