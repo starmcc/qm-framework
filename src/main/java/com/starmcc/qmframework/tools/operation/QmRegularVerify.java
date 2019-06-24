@@ -12,13 +12,12 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 /**
- * 字符串正则验证工具类
+ * 字符串正则验证服务
  *
  * @Author qm
  * @Date 2019年5月5日11:38:33
  */
-@Deprecated
-public class QmVerifyUtil {
+public class QmRegularVerify {
 
     /**
      * properties读取对象

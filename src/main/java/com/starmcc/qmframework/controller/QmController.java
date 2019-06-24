@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.starmcc.qmframework.config.QmFrameConstants;
 import com.starmcc.qmframework.exception.QmFrameException;
-import com.starmcc.qmframework.tools.operation.AesTools;
+import com.starmcc.qmframework.tools.operation.QmAesTools;
 import org.apache.commons.text.StringEscapeUtils;
 
 import java.util.Date;
@@ -78,7 +78,7 @@ public class QmController {
         String json = jsonObject.getString(QmFrameConstants.REQUEST_DATA_KEY);
         if (QmFrameConstants.AES_START) {
             try {
-                json = AesTools.decryptAES(json);
+                json = QmAesTools.decryptAES(json);
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -99,7 +99,7 @@ public class QmController {
         value = StringEscapeUtils.unescapeJava(value);
         try {
             if (QmFrameConstants.AES_START) {
-                value = AesTools.encryptAES(value);
+                value = QmAesTools.encryptAES(value);
                 Map<String, String> resMap = new HashMap<>(16);
                 resMap.put(QmFrameConstants.RESPONSE_DATA_KEY, value);
                 return StringEscapeUtils.unescapeJava(JSONObject.toJSONString(resMap, SerializerFeature.WriteMapNullValue));

@@ -17,8 +17,7 @@ import java.util.Date;
  *
  * @Author qm
  */
-@Deprecated
-public class AesTools {
+public class QmAesTools {
 
     private static final Logger LOG = LoggerFactory.getLogger(QmAesTools.class);
 

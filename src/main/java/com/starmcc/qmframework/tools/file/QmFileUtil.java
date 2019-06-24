@@ -7,8 +7,7 @@ import java.io.*;
  *
  * @Author qm
  */
-@Deprecated
-public class FileUtil {
+public class QmFileUtil {
 
     /**
      * 以字节为单位读取文件，通常用于读取二进制文件，如图片
@@ -116,7 +115,7 @@ public class FileUtil {
         FileWriter fw = null;
         try {
             /**
-             * Constructs a FileWriter object given a File object.
+             * Constructs a FileWriter object given a File object. 
              * If the second argument is true, then bytes will be written to the end of the file rather than the beginning.
              * 根据给定的File对象构造一个FileWriter对象。 如果append参数为true, 则字节将被写入到文件的末尾（向文件中追加内容）
              *
@@ -124,9 +123,9 @@ public class FileUtil {
              *        file,  a File object to write to 带写入的文件对象
              *        append,  if true, then bytes will be written to the end of the file rather than the beginning
              *    Throws:
-             *        IOException -
-             *        if the file exists but is a directory rather than a regular file,
-             *            does not exist but cannot be created,
+             *        IOException - 
+             *        if the file exists but is a directory rather than a regular file, 
+             *            does not exist but cannot be created, 
              *            or cannot be opened for any other reason
              *      报异常的3种情况：
              *          file对象是一个存在的目录（不是一个常规文件）

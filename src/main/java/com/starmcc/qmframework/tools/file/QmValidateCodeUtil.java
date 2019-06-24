@@ -14,8 +14,7 @@ import java.util.Random;
  * @Author qm
  * @Date 2018年11月24日 上午2:12:12
  */
-@Deprecated
-public class ValidateCodeUtil {
+public class QmValidateCodeUtil {
     /**
      * 图片的宽度
      */
@@ -50,7 +49,7 @@ public class ValidateCodeUtil {
     /**
      * 默认构造函数, 设置默认参数
      */
-    public ValidateCodeUtil() {
+    public QmValidateCodeUtil() {
         this.createCode();
     }
 
@@ -60,7 +59,7 @@ public class ValidateCodeUtil {
      * @param width  图片宽
      * @param height 图片高
      */
-    public ValidateCodeUtil(int width, int height) {
+    public QmValidateCodeUtil(int width, int height) {
         this.width = width;
         this.height = height;
         this.createCode();
@@ -74,7 +73,7 @@ public class ValidateCodeUtil {
      * @param codeCount 字符个数
      * @param lineCount 干扰线条数
      */
-    public ValidateCodeUtil(int width, int height, int codeCount, int lineCount) {
+    public QmValidateCodeUtil(int width, int height, int codeCount, int lineCount) {
         this.width = width;
         this.height = height;
         this.codeCount = codeCount;

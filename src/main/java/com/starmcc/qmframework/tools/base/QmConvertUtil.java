@@ -13,8 +13,7 @@ import java.util.Map;
  * @Author qm
  * @Date 2018年11月24日 上午1:57:19
  */
-@Deprecated
-public class ConvertUtil {
+public class QmConvertUtil {
     /**
      * 将对象装换为map
      *

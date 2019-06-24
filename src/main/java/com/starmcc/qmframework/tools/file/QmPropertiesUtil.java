@@ -11,8 +11,7 @@ import java.util.Properties;
  * @Author qm
  * @Date 2018年11月24日 上午2:09:11
  */
-@Deprecated
-public class PropertiesUtil {
+public class QmPropertiesUtil {
 
     /**
      * 如果需要读取其他配置文件请指定fileName的值;
@@ -20,7 +19,7 @@ public class PropertiesUtil {
     public static String fileName = null;
     private static Properties properties;
 
-    private PropertiesUtil() {
+    private QmPropertiesUtil() {
     }
 
     static {

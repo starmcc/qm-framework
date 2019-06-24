@@ -9,8 +9,7 @@ import java.util.UUID;
  * @Author qm
  * @Date 2018年11月24日 上午2:06:55
  */
-@Deprecated
-public class NumberUtil {
+public class QmNumberUtil {
 
     /**
      * 生成UUID
