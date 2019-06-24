@@ -1,4 +1,4 @@
-# Qm-Framework 1.0.3
+# Qm-Framework 1.0.4
 
 ## 1. Maven Warehouse
 
@@ -12,7 +12,7 @@
 <dependency>
   <groupId>com.starmcc</groupId>
   <artifactId>qm-framework</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
 </dependency>
 ```
 
