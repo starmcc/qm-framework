@@ -1,4 +1,4 @@
-# Qm-Framework 1.0.4
+# Qm-Framework 1.1.0
 
 ## 1. Maven Warehouse
 
