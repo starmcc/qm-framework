@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  * @Author qm
  * @Date 2019年5月5日11:38:33
  */
-public class QmRegularVerify {
+public class QmRegularUtils {
 
     /**
      * properties读取对象
@@ -26,7 +26,7 @@ public class QmRegularVerify {
     /**
      * 打印日志工具
      */
-    private final static Logger LOG = LoggerFactory.getLogger(QmVerifyUtil.class);
+    private final static Logger LOG = LoggerFactory.getLogger(QmRegularUtils.class);
 
     private static Properties getProperties() {
         Properties properties = new Properties();

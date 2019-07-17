@@ -9,7 +9,7 @@ import java.util.UUID;
  * @Author qm
  * @Date 2018年11月24日 上午2:06:55
  */
-public class QmNumberUtil {
+public class QmRandomUtil {
 
     /**
      * 生成UUID
