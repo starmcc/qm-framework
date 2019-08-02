@@ -5,7 +5,6 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.starmcc.qmframework.config.QmFrameConstants;
 import com.starmcc.qmframework.exception.QmFrameException;
 import com.starmcc.qmframework.tools.operation.QmAesTools;
-import org.apache.commons.text.StringEscapeUtils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -95,20 +94,18 @@ public class QmController {
      */
     private String parseJsonToResponse(Map<String, Object> responseMap) {
         //SerializerFeature.WriteMapNullValue设置后,返回Bean时字段为空时默认返回null
-        String value = JSONObject.toJSONString(responseMap, SerializerFeature.WriteMapNullValue);
-        value = StringEscapeUtils.unescapeJava(value);
+        String data = JSONObject.toJSONString(responseMap, SerializerFeature.WriteMapNullValue);
         try {
             if (QmFrameConstants.AES_START) {
-                value = QmAesTools.encryptAES(value);
-                Map<String, String> resMap = new HashMap<>(16);
-                resMap.put(QmFrameConstants.RESPONSE_DATA_KEY, value);
-                return StringEscapeUtils.unescapeJava(JSONObject.toJSONString(resMap, SerializerFeature.WriteMapNullValue));
+                Map<String, String> valueMap = new HashMap<>(16);
+                valueMap.put(QmFrameConstants.RESPONSE_DATA_KEY, QmAesTools.encryptAES(data));
+                return JSONObject.toJSONString(valueMap, SerializerFeature.WriteMapNullValue);
             }
         } catch (Exception e) {
             throw new QmFrameException("加密失败", e);
         }
-        Map<String, Map<String, Object>> resMap = new HashMap<>(16);
-        resMap.put(QmFrameConstants.RESPONSE_DATA_KEY, responseMap);
-        return JSONObject.toJSONString(resMap, SerializerFeature.WriteMapNullValue);
+        Map<String, Map<String, Object>> valueMap = new HashMap<>(16);
+        valueMap.put(QmFrameConstants.RESPONSE_DATA_KEY, responseMap);
+        return JSONObject.toJSONString(valueMap, SerializerFeature.WriteMapNullValue);
     }
 }
