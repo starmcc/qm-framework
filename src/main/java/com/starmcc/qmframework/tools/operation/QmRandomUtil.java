@@ -14,18 +14,14 @@ public class QmRandomUtil {
     /**
      * 生成UUID
      *
-     * @param prefix 前缀，如果不需要请传递null
      * @return uuid
      */
-    public static String createUUID(String prefix) {
+    public static String createUUID() {
         UUID uuid = UUID.randomUUID();
         String str = uuid.toString();
         // 去掉"-"符号
         String temp = str.substring(0, 8) + str.substring(9, 13) + str.substring(14, 18) + str.substring(19, 23)
                 + str.substring(24);
-        if (!"".equals(prefix.trim())) {
-            temp = prefix + temp;
-        }
         return temp;
     }
 

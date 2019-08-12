@@ -87,8 +87,8 @@ public class QmAesTools {
     public static String decryptAES(String data, int num, String key) throws Exception {
         Date date = new Date();
         String str = data;
-        for (int i = 0; i < QmFrameConstants.AES_NUMBER; i++) {
-            str = decryptAES(str, QmFrameConstants.AES_KEY);
+        for (int i = 0; i < num; i++) {
+            str = decryptAES(str, key);
         }
         LOG.debug("解密用时：" + (System.currentTimeMillis() - date.getTime()));
         return str;
