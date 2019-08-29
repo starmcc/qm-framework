@@ -1,6 +1,7 @@
 package com.starmcc.qmframework.filter;
 
-import com.starmcc.qmframework.config.QmFrameConstants;
+import com.starmcc.qmframework.config.TransmitConfiguration;
+import com.starmcc.qmframework.config.VersionConfiguration;
 import com.starmcc.qmframework.controller.QmCode;
 import com.starmcc.qmframework.controller.QmController;
 import com.starmcc.qmframework.tools.spring.QmSpringManager;
@@ -36,7 +37,7 @@ public class InitFilter extends QmController implements Filter {
             return;
         }
         // 设置请求头和相应头
-        settingRequsetOrResponse(request,response);
+        settingRequsetOrResponse(request, response);
         LOG.info("※※※请求URI：" + request.getRequestURI() + "※※※");
         //特殊请求
         if (verifySpecialURI(request)) {
@@ -57,6 +58,7 @@ public class InitFilter extends QmController implements Filter {
 
     /**
      * 设置请求头和相应头,支持跨域。
+     *
      * @param request
      * @param response
      * @throws UnsupportedEncodingException
@@ -77,7 +79,7 @@ public class InitFilter extends QmController implements Filter {
      * @return
      */
     private boolean verifySpecialURI(HttpServletRequest request) {
-        for (String uri : QmFrameConstants.REQUEST_SPECIAL_URI) {
+        for (String uri : TransmitConfiguration.requestSpecialUri) {
             if (QmSpringManager.verifyMatchURI(uri, request.getRequestURI())) {
                 return true;
             }
@@ -87,24 +89,28 @@ public class InitFilter extends QmController implements Filter {
 
     /**
      * 版本验证工具
+     *
      * @param request
      * @return
      * @throws IOException
      */
     private boolean verifyVersion(HttpServletRequest request) throws IOException {
         //不开启版本控制
-        if (!QmFrameConstants.VERSION_START) {return true;};
+        if (!VersionConfiguration.start) {
+            return true;
+        }
+        ;
         //目前版本号
         String versionRequest = request.getHeader("version");
         LOG.info("※※※请求版本号：" + versionRequest + "※※※");
-        LOG.info("※※※当前版本号：" + QmFrameConstants.VERSION_NOW + "※※※");
-        if (QmFrameConstants.VERSION_NOW.equals(versionRequest)) {
+        LOG.info("※※※当前版本号：" + VersionConfiguration.now + "※※※");
+        if (VersionConfiguration.now.equals(versionRequest)) {
             //通过
             return true;
         }
         LOG.debug("※※※进入版本控制判断※※※");
-        if (QmFrameConstants.VERSION_ALLOWS != null && QmFrameConstants.VERSION_ALLOWS.size() > 0) {
-            for (String version : QmFrameConstants.VERSION_ALLOWS) {
+        if (VersionConfiguration.allows != null && VersionConfiguration.allows.length > 0) {
+            for (String version : VersionConfiguration.allows) {
                 if (version.equals(versionRequest)) {
                     //通过
                     return true;

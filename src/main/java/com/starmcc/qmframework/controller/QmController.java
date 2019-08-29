@@ -2,7 +2,8 @@ package com.starmcc.qmframework.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.starmcc.qmframework.config.QmFrameConstants;
+import com.starmcc.qmframework.config.AesConfiguration;
+import com.starmcc.qmframework.config.TransmitConfiguration;
 import com.starmcc.qmframework.exception.QmFrameException;
 import com.starmcc.qmframework.tools.operation.QmAesTools;
 
@@ -74,8 +75,8 @@ public class QmController {
      */
     public String parseRequestJson(String value) {
         JSONObject jsonObject = JSONObject.parseObject(value);
-        String json = jsonObject.getString(QmFrameConstants.REQUEST_DATA_KEY);
-        if (QmFrameConstants.AES_START) {
+        String json = jsonObject.getString(TransmitConfiguration.requestKey);
+        if (AesConfiguration.start) {
             try {
                 json = QmAesTools.decryptAES(json);
             } catch (Exception e) {
@@ -96,16 +97,16 @@ public class QmController {
         //SerializerFeature.WriteMapNullValue设置后,返回Bean时字段为空时默认返回null
         String data = JSONObject.toJSONString(responseMap, SerializerFeature.WriteMapNullValue);
         try {
-            if (QmFrameConstants.AES_START) {
+            if (AesConfiguration.start) {
                 Map<String, String> valueMap = new HashMap<>(16);
-                valueMap.put(QmFrameConstants.RESPONSE_DATA_KEY, QmAesTools.encryptAES(data));
+                valueMap.put(TransmitConfiguration.responseKey, QmAesTools.encryptAES(data));
                 return JSONObject.toJSONString(valueMap, SerializerFeature.WriteMapNullValue);
             }
         } catch (Exception e) {
             throw new QmFrameException("加密失败", e);
         }
         Map<String, Map<String, Object>> valueMap = new HashMap<>(16);
-        valueMap.put(QmFrameConstants.RESPONSE_DATA_KEY, responseMap);
+        valueMap.put(TransmitConfiguration.responseKey, responseMap);
         return JSONObject.toJSONString(valueMap, SerializerFeature.WriteMapNullValue);
     }
 }

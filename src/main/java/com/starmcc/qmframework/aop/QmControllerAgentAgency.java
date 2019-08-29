@@ -1,7 +1,5 @@
 package com.starmcc.qmframework.aop;
 
-import com.starmcc.qmframework.config.QmFrameConstants;
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;

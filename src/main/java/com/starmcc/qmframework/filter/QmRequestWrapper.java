@@ -1,7 +1,8 @@
 package com.starmcc.qmframework.filter;
 
 import com.alibaba.fastjson.JSONObject;
-import com.starmcc.qmframework.config.QmFrameConstants;
+import com.starmcc.qmframework.config.AesConfiguration;
+import com.starmcc.qmframework.config.TransmitConfiguration;
 import com.starmcc.qmframework.tools.operation.QmAesTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,8 +66,8 @@ public class QmRequestWrapper extends HttpServletRequestWrapper {
             return body;
         }
         JSONObject jsonObject = JSONObject.parseObject(body);
-        String json = jsonObject.getString(QmFrameConstants.REQUEST_DATA_KEY);
-        if (QmFrameConstants.AES_START) {
+        String json = jsonObject.getString(TransmitConfiguration.responseKey);
+        if (AesConfiguration.start) {
             try {
                 json = QmAesTools.decryptAES(json);
             } catch (Exception e) {

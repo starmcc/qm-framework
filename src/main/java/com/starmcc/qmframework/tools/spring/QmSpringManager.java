@@ -58,7 +58,7 @@ public class QmSpringManager implements ApplicationContextAware {
     /**
      * 通过name, 以及Clazz返回指定的Bean
      *
-     * @param name name
+     * @param name  name
      * @param clazz class
      * @return
      */

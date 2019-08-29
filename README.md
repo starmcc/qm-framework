@@ -1,4 +1,4 @@
-# Qm-Framework 1.1.1
+# Qm-Framework
 
 ## 1. Maven Warehouse
 
@@ -12,7 +12,7 @@
 <dependency>
   <groupId>com.starmcc</groupId>
   <artifactId>qm-framework</artifactId>
-  <version>1.1.1</version>
+  <version>1.2.0</version>
 </dependency>
 ```
 
@@ -30,7 +30,7 @@
 
 * java - JDK 1.8 above
 * Maven 2.0 above
-* SpringBoot 2.1.3 above
+* SpringBoot 2.1.5 above
 
 ## 4. Package Content
 
@@ -57,9 +57,6 @@
 4.6 RequestBody自定义注解@QmBody
 
 > 在请求时对请求`body`中的`json`数据进行自动装配,在`controller`中参数列表可直接获取对应类型的参数。
-
-
-
 
 ## Author
 

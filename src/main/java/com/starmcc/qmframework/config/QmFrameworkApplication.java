@@ -1,14 +1,18 @@
 package com.starmcc.qmframework.config;
 
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.starmcc.qmframework.body.JsonPathArgumentResolver;
-import com.starmcc.qmframework.exception.QmFrameException;
 import com.starmcc.qmframework.filter.InitFilter;
 import com.starmcc.qmframework.tools.spring.QmSpringManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -20,7 +24,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,15 +34,22 @@ import java.util.List;
  * @Author qm
  * @Date 2018年11月24日 上午1:33:11
  */
+@Import({TransmitConfiguration.class,
+        VersionConfiguration.class,
+        AesConfiguration.class})
 public class QmFrameworkApplication implements WebMvcConfigurer {
 
+    private static final Logger LOG = LoggerFactory.getLogger(QmFrameworkApplication.class);
+
+    private static final String GIT_HUB_URL = "https://github.com/starmcc/qm-framework";
+
+
     /**
-     * 项目启动时，只执行一次 Banner 打印
+     * 项目启动时，只执行一次
      */
     @PostConstruct
     private final void init() {
-        String banner = QmReadBanner.getBanner("/banner.txt");
-        System.out.println(banner);
+//        System.err.println(TransmitConfiguration.requestKey);
     }
 
     /**
@@ -47,8 +57,8 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
      */
     @PreDestroy
     private final void preDestroy() {
-        System.out.println("※※※※※※※※※※※※服务已停止※※※※※※※※※※※※");
-        System.out.println("浅梦gitHub:https://github.com/starmcc/QMBoootFrame");
+        LOG.info("※※※※※※※※※※※※服务已停止※※※※※※※※※※※※");
+        LOG.info("浅梦gitHub:{}", GIT_HUB_URL);
     }
 
     /**
@@ -67,12 +77,9 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
      * @return 数据源
      */
     @Bean(initMethod = "init", destroyMethod = "close")
-    public DataSource settingDataSource() {
-        try {
-            return (DataSource) QmDataSourceFactory.getDruidDataSource();
-        } catch (SQLException e) {
-            throw new QmFrameException("数据源配置异常!", e);
-        }
+    @ConfigurationProperties(prefix = "spring.datasource.druid")
+    public DataSource dataSource() {
+        return DruidDataSourceBuilder.create().build();
     }
 
     /**

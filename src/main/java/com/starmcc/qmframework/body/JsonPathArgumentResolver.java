@@ -2,7 +2,7 @@ package com.starmcc.qmframework.body;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.starmcc.qmframework.config.QmFrameConstants;
+import com.starmcc.qmframework.config.TransmitConfiguration;
 import com.starmcc.qmframework.controller.QmController;
 import com.starmcc.qmframework.exception.QmParamErrorException;
 import com.starmcc.qmframework.exception.QmParamNullException;
@@ -57,7 +57,7 @@ public class JsonPathArgumentResolver extends QmController implements HandlerMet
         String jsonBody = getRequestBody(webRequest);
         JSONObject jsonObject = JSON.parseObject(jsonBody);
         if (jsonObject == null) {
-            throw new QmParamNullException(QmFrameConstants.REQUEST_DATA_KEY);
+            throw new QmParamNullException(TransmitConfiguration.requestKey);
         }
         // 根据@qmBody注解value作为json解析的key
         QmBody qmBody = parameter.getParameterAnnotation(QmBody.class);

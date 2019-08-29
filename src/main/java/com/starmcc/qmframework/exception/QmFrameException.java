@@ -17,7 +17,6 @@ public class QmFrameException extends RuntimeException {
         super(message);
     }
 
-
     public QmFrameException(String message, Throwable cause) {
         super(message, cause);
     }

@@ -1,7 +1,7 @@
 package com.starmcc.qmframework.controller;
 
 
-import com.starmcc.qmframework.config.QmFrameConstants;
+import com.starmcc.qmframework.config.TransmitConfiguration;
 
 /**
  * 数据请求状态码工具类
@@ -125,6 +125,6 @@ public enum QmCode {
      * @return msg
      */
     public static final String getMsg(QmCode code) {
-        return "cn".equalsIgnoreCase(QmFrameConstants.RESPONSE_MESSAGE_LANG) ? code.cnMsg : code.enMsg;
+        return "cn".equalsIgnoreCase(TransmitConfiguration.responseMessageLang) ? code.cnMsg : code.enMsg;
     }
 }
