@@ -13,18 +13,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class TransmitConfiguration {
 
     public static String requestKey;
-    public static String[] requestSpecialUri;
     public static String responseKey;
     public static String responseMessageLang;
 
     @Value("${request.key:value}")
     public void setRequestKey(String requestKey) {
         TransmitConfiguration.requestKey = requestKey;
-    }
-
-    @Value("${request-special-uri:}")
-    public void setRequestSpecialUri(String[] requestSpecialUri) {
-        TransmitConfiguration.requestSpecialUri = requestSpecialUri;
     }
 
     @Value("${response-key:value}")
@@ -39,10 +33,6 @@ public class TransmitConfiguration {
 
     public String getRequestKey() {
         return TransmitConfiguration.requestKey;
-    }
-
-    public String[] getRequestSpecialUri() {
-        return TransmitConfiguration.requestSpecialUri;
     }
 
     public String getResponseKey() {

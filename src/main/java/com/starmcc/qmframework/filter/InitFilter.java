@@ -1,6 +1,6 @@
 package com.starmcc.qmframework.filter;
 
-import com.starmcc.qmframework.config.TransmitConfiguration;
+import com.starmcc.qmframework.config.SpecialConfiguration;
 import com.starmcc.qmframework.config.VersionConfiguration;
 import com.starmcc.qmframework.controller.QmCode;
 import com.starmcc.qmframework.controller.QmController;
@@ -79,7 +79,7 @@ public class InitFilter extends QmController implements Filter {
      * @return
      */
     private boolean verifySpecialURI(HttpServletRequest request) {
-        for (String uri : TransmitConfiguration.requestSpecialUri) {
+        for (String uri : SpecialConfiguration.uri) {
             if (QmSpringManager.verifyMatchURI(uri, request.getRequestURI())) {
                 return true;
             }
