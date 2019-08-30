@@ -14,7 +14,7 @@
 <dependency>
   <groupId>com.starmcc</groupId>
   <artifactId>qm-framework</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.0-BETA</version>
 </dependency>
 ```
 
@@ -26,7 +26,7 @@
 
 ### *2.2 Latest Version*
 
-[**Show Version(Releases)**](https://github.com/starmcc/qm-framework/releases)
+[**Show Version(Releases)**](https://starmcc.github.io/qm-framework/UpdateLog)
 
 ## 3. Environment
 
