@@ -22,11 +22,11 @@
 
 ### *2.1 Help Document*
 
-[**Qm-Framework Document**](https://starmcc.github.io/qm-framework/)
+[**Show Document**](https://starmcc.github.io/qm-framework/)
 
-### *2.2 Latest Version*
+### *2.2 Update Version Log*
 
-[**Show Version(Releases)**](https://starmcc.github.io/qm-framework/UpdateLog)
+[**Show Version**](https://starmcc.github.io/qm-framework/UpdateLog)
 
 ## 3. Environment
 
