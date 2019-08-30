@@ -22,7 +22,7 @@
 
 ### *2.1 Help Document*
 
-[**Qm-Framework Wiki**](https://github.com/starmcc/qm-framework/wiki)
+[**Qm-Framework Document**](https://starmcc.github.io/qm-framework/)
 
 ### *2.2 Latest Version*
 
