@@ -36,6 +36,7 @@ import java.util.List;
  */
 @Import({TransmitConfiguration.class,
         VersionConfiguration.class,
+        SpecialConfiguration.class,
         AesConfiguration.class})
 public class QmFrameworkApplication implements WebMvcConfigurer {
 

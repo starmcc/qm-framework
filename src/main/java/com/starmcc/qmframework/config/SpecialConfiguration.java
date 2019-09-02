@@ -3,6 +3,8 @@ package com.starmcc.qmframework.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import java.util.List;
+
 /**
  * 特殊请求配置
  *
