@@ -26,7 +26,7 @@
 
 ### *2.2 Update Version Log*
 
-[**Show Version**](http://www.starmcc.com/qm-framework/UpdateLog)
+[**Show Version**](http://www.starmcc.com/qm-framework/UpdateLog.html)
 
 ## 3. Environment
 
