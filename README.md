@@ -22,11 +22,11 @@
 
 ### *2.1 Help Document*
 
-[**Show Document**](www.starmcc.com/qm-framework/)
+[**Show Document**](http://www.starmcc.com/qm-framework/)
 
 ### *2.2 Update Version Log*
 
-[**Show Version**](www.starmcc.com/qm-framework/UpdateLog)
+[**Show Version**](http://www.starmcc.com/qm-framework/UpdateLog)
 
 ## 3. Environment
 
