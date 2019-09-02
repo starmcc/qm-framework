@@ -14,7 +14,7 @@
 <dependency>
   <groupId>com.starmcc</groupId>
   <artifactId>qm-framework</artifactId>
-  <version>1.2.0-BETA</version>
+  <version>1.2.0-RELEASE</version>
 </dependency>
 ```
 
