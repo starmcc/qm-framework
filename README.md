@@ -22,11 +22,11 @@
 
 ### *2.1 Help Document*
 
-[**Show Document**](https://starmcc.github.io/qm-framework/)
+[**Show Document**](www.starmcc.com/qm-framework/)
 
 ### *2.2 Update Version Log*
 
-[**Show Version**](https://starmcc.github.io/qm-framework/UpdateLog)
+[**Show Version**](www.starmcc.com/qm-framework/UpdateLog)
 
 ## 3. Environment
 
@@ -59,12 +59,3 @@
 4.6 RequestBody自定义注解@QmBody
 
 > 在请求时对请求`body`中的`json`数据进行自动装配,在`controller`中参数列表可直接获取对应类型的参数。
-
-## Author
-
-- 小生不才,黄阶后期,跪求各路高手路过指点迷津
-- 浅梦在此感谢各位的 Star
-- Email:starczt1992@163.com
-- 一个纯粹的Java农民
-
-> 指若下键万里行，如入浅梦醉逍遥。
