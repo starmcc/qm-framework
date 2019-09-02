@@ -7,7 +7,7 @@
     <groupId>com.starmcc</groupId>
     <artifactId>qm-framework</artifactId>
     <version>1.2.0-RELEASE</version>
-    <url>http://www.starmcc.com/qm-framework/120/</url>
+    <url>http://www.starmcc.com/qm-framework/</url>
     <description>
         springboot based on a series of packaging framework.
         QmFramework to implements AOP,
@@ -47,9 +47,9 @@
     </licenses>
     <!-- scm -->
     <scm>
-        <url>https://github.com/starmcc/qm-framework</url>
+        <url>https://github.com/starmcc/qm-framework.git</url>
         <connection>https://github.com/starmcc/qm-framework.git</connection>
-        <developerConnection>https://starmcc.github.io/qm-framework</developerConnection>
+        <developerConnection>https://github.com/starmcc/qm-framework.git</developerConnection>
     </scm>
     <!-- oss提交maven -->
     <distributionManagement>
