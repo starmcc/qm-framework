@@ -1,6 +1,6 @@
 
                            SpringBoot:${spring-boot.version}
-                           QmFramework:1.2.0-beta
+                           QmFramework:1.2.1-RELEASE
                       ____    __  __________  ___   __  _______
                      / __ \  /  |/  / __/ _ \/ _ | /  |/  / __/
                     / /_/ / / /|_/ / _// , _/ __ |/ /|_/ / _/
