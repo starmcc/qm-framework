@@ -19,38 +19,6 @@ public enum QmCode {
      */
     _2(2, "操作失败", "Defeated"),
     /**
-     * 未定义消息
-     */
-    _3(3, "未定义消息", "Undefined message"),
-    /**
-     * 未定义消息
-     */
-    _4(4, "未定义消息", "Undefined message"),
-    /**
-     * 未定义消息
-     */
-    _5(5, "未定义消息", "Undefined message"),
-    /**
-     * 未定义消息
-     */
-    _6(6, "未定义消息", "Undefined message"),
-    /**
-     * 未定义消息
-     */
-    _7(7, "未定义消息", "Undefined message"),
-    /**
-     * 未定义消息
-     */
-    _8(8, "未定义消息", "Undefined message"),
-    /**
-     * 未定义消息
-     */
-    _9(9, "未定义消息", "Undefined message"),
-    /**
-     * 未定义消息
-     */
-    _10(10, "未定义消息", "Undefined message"),
-    /**
      * 参数提供不完整
      */
     _100(100, "参数提供不完整", "Parameter is incomplete"),

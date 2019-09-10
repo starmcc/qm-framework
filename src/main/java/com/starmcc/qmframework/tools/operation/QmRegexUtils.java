@@ -1,6 +1,5 @@
 package com.starmcc.qmframework.tools.operation;
 
-import com.starmcc.qmframework.tools.file.QmPropertiesUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -12,12 +11,12 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 /**
- * 字符串正则验证服务
+ * 字符串正则验证工具
  *
  * @Author qm
  * @Date 2019年5月5日11:38:33
  */
-public class QmRegularUtils {
+public class QmRegexUtils {
 
     /**
      * properties读取对象
@@ -26,7 +25,9 @@ public class QmRegularUtils {
     /**
      * 打印日志工具
      */
-    private final static Logger LOG = LoggerFactory.getLogger(QmRegularUtils.class);
+    private final static Logger LOG = LoggerFactory.getLogger(QmRegexUtils.class);
+
+    private static boolean newOld = true;
 
     private static Properties getProperties() {
         Properties properties = new Properties();
@@ -34,8 +35,14 @@ public class QmRegularUtils {
         try {
             // 读取properties文件,使用InputStreamReader字符流防止文件中出现中文导致乱码
             inStream = new InputStreamReader
-                    (QmPropertiesUtil.class.getClassLoader().getResourceAsStream("verify.properties"),
+                    (QmRegexUtils.class.getClassLoader().getResourceAsStream("config.properties"),
                             "UTF-8");
+            if (inStream == null){
+                QmRegexUtils.newOld = false;
+                inStream = new InputStreamReader
+                        (QmRegexUtils.class.getClassLoader().getResourceAsStream("verify.properties"),
+                                "UTF-8");
+            }
             properties.load(inStream);
             return properties;
         } catch (UnsupportedEncodingException e) {
@@ -56,8 +63,8 @@ public class QmRegularUtils {
 
     /**
      * 校验内容是否匹配正则表达式
-     * 使用该方法时，请确保resource目录下存在verify.properties文件
-     * 根据verify.properties文件的节点检索正则表达式。
+     * 使用该方法时，请确保resource目录下存在config.properties文件
+     * 根据config.properties文件的节点检索正则表达式。
      *
      * @param node  properties的节点名称
      * @param value 需要校验的值
@@ -68,7 +75,12 @@ public class QmRegularUtils {
             return false;
         }
         try {
-            String regex = PRO.getProperty(node);
+            String regex;
+            if (QmRegexUtils.newOld){
+                regex = PRO.getProperty( "regex." + node);
+            }else {
+                regex = PRO.getProperty(node);
+            }
             if (regex == null) {
                 LOG.error(String.format("%s节点读取失败！请检查properties的节点是否一致。", node));
                 return false;
@@ -89,7 +101,7 @@ public class QmRegularUtils {
      */
     public static String getErrorMsg(String node) {
         try {
-            String msg = PRO.getProperty(node + ".errorMsg");
+            String msg = PRO.getProperty("regex." + node + ".errorMsg");
             if (msg == null) {
                 return node + "校验失败!";
             }
