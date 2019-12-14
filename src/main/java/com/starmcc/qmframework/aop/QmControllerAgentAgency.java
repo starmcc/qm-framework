@@ -72,7 +72,7 @@ public class QmControllerAgentAgency {
     @Before("qmPointcut()")
     public void before(JoinPoint jp) {
         starTime = System.currentTimeMillis();
-        if (qmControllerAgent != null) {
+        if (null != qmControllerAgent) {
             qmControllerAgent.before(jp);
         }
         if (isPrintLogger) {
@@ -96,7 +96,7 @@ public class QmControllerAgentAgency {
     @AfterReturning(pointcut = "qmPointcut()", returning = "result")
     public void afterReturning(JoinPoint jp, Object result) {
         Long time = System.currentTimeMillis() - starTime;
-        if (qmControllerAgent != null) {
+        if (null != qmControllerAgent) {
             qmControllerAgent.afterReturning(jp, result, time);
         }
         if (isPrintLogger) {

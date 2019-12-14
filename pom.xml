@@ -6,7 +6,7 @@
     <name>QmFramework</name>
     <groupId>com.starmcc</groupId>
     <artifactId>qm-framework</artifactId>
-    <version>1.2.1-RELEASE</version>
+    <version>1.2.2-RELEASE</version>
     <url>http://www.starmcc.com/qm-framework/</url>
     <description>
         springboot based on a series of packaging framework.

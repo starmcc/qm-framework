@@ -20,7 +20,7 @@ public class QmSpringManager implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        if (QmSpringManager.applicationContext == null) {
+        if (null == QmSpringManager.applicationContext) {
             QmSpringManager.applicationContext = applicationContext;
             LOG.info("※※※※※※QmSpringManager设置ApplicationContext成功※※※※※※");
         }

@@ -98,14 +98,14 @@ public class QmRequestWrapper extends HttpServletRequestWrapper {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (inputStream != null) {
+            if (null != inputStream) {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            if (reader != null) {
+            if (null != reader) {
                 try {
                     reader.close();
                 } catch (IOException e) {

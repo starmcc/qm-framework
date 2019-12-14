@@ -88,19 +88,19 @@ public class QmHttpClient {
     public static String getHttpIp(HttpServletRequest request) {
         String ip = request.getHeader("x-forwarded-for");
         String unknown = "unknown";
-        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
+        if (null == ip || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
-        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
+        if (null == ip || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
-        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
+        if (null == ip || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_CLIENT_IP");
         }
-        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
+        if (null == ip || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_X_FORWARDED_FOR");
         }
-        if (ip == null || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
+        if (null == ip || ip.length() == 0 || unknown.equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
         return ip;
@@ -127,7 +127,7 @@ public class QmHttpClient {
                 post.setHeader(entry.getKey(), entry.getValue());
             }
         }
-        if (params != null) {
+        if (null != params) {
             // 处理参数
             HttpEntity entity = handleParam(params, encoding);
             // 添加参数
@@ -162,12 +162,12 @@ public class QmHttpClient {
                                   String encoding) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet get = new HttpGet(url);
-        if (headers != null && headers.size() != 0) {
+        if (null != headers && headers.size() != 0) {
             for (Map.Entry<String, String> entry : headers.entrySet()) {
                 get.setHeader(entry.getKey(), entry.getValue());
             }
         }
-        if (params != null) {
+        if (null != params) {
             // 处理参数
             HttpEntity entity = handleParam(params, encoding);
             try {
@@ -234,10 +234,10 @@ public class QmHttpClient {
      */
     private static void close(CloseableHttpResponse response, CloseableHttpClient httpClient) {
         try {
-            if (response != null) {
+            if (null != response) {
                 response.close();
             }
-            if (httpClient != null) {
+            if (null != httpClient) {
                 httpClient.close();
             }
         } catch (Exception e) {

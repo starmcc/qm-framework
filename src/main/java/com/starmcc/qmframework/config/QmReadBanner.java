@@ -29,7 +29,7 @@ public class QmReadBanner {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
             StringBuffer sb = new StringBuffer();
             String temp = null;
-            while ((temp = bufferedReader.readLine()) != null) {
+            while (null != (temp = bufferedReader.readLine())) {
                 sb.append(temp + "\n");
             }
             return sb.toString();

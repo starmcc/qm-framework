@@ -102,7 +102,7 @@ public class QmRegexUtils {
     public static String getErrorMsg(String node) {
         try {
             String msg = PRO.getProperty("regex." + node + ".errorMsg");
-            if (msg == null) {
+            if (null == msg) {
                 return node + "校验失败!";
             }
             return msg;

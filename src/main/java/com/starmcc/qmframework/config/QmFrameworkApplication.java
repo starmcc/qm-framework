@@ -59,7 +59,7 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
     @PreDestroy
     private final void preDestroy() {
         LOG.info("※※※※※※※※※※※※服务已停止※※※※※※※※※※※※");
-        LOG.info("浅梦gitHub:{}", GIT_HUB_URL);
+        LOG.info("浅梦GitHub:{}", GIT_HUB_URL);
     }
 
     /**

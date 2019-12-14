@@ -1,5 +1,7 @@
 package com.starmcc.qmframework.tools.file;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -68,7 +70,7 @@ public class QmPropertiesUtil {
      */
     public static String get(String key, String defaultValue) {
         String value = properties.getProperty(key, defaultValue);
-        if ("".equals(value.trim())) {
+        if (StringUtils.isBlank(value.trim())) {
             value = defaultValue;
         }
         return value;
