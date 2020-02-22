@@ -1,6 +1,5 @@
 package com.starmcc.qmframework.config;
 
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
@@ -9,7 +8,6 @@ import com.starmcc.qmframework.filter.InitFilter;
 import com.starmcc.qmframework.tools.spring.QmSpringManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -23,7 +21,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +47,6 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
      */
     @PostConstruct
     private final void init() {
-//        System.err.println(TransmitConfiguration.requestKey);
     }
 
     /**
@@ -70,17 +66,6 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
     @Bean
     public QmSpringManager initQmSpringManager() {
         return new QmSpringManager();
-    }
-
-    /**
-     * 注入该DataSource
-     *
-     * @return 数据源
-     */
-    @Bean(initMethod = "init", destroyMethod = "close")
-    @ConfigurationProperties(prefix = "spring.datasource.druid")
-    public DataSource dataSource() {
-        return DruidDataSourceBuilder.create().build();
     }
 
     /**
