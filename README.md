@@ -1,6 +1,6 @@
 # Qm-Framework
 
-![logo](/logo.png)
+![logo](./logo.png)
 
 ## 1. Maven Warehouse
 
