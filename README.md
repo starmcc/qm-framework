@@ -32,7 +32,7 @@
 
 * java - JDK 1.8 above
 * Maven 2.0 above
-* SpringBoot 2.1.5 above
+* SpringBoot 2.3.4 above
 
 ## 4. Package Content
 
@@ -55,3 +55,11 @@
 4.5 RequestBody自定义注解@QmBody
 
 > 在请求时对请求`body`中的`json`数据进行自动装配,在`controller`中参数列表可直接获取对应类型的参数。
+
+4.6 快速拓展AOP业务场景 (新)
+
+> 在方法上添加`@Agent`实现对方法快速AOP代理
+
+4.7 精简快速的异步事件拓展 (新)
+
+> 定义一个事件或异步事件，只需实现函数式接口`QmEventInterface`，在需要的地方使用`QmEventManager`。
