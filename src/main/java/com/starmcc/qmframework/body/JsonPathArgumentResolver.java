@@ -54,7 +54,7 @@ public class JsonPathArgumentResolver extends QmController implements HandlerMet
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 
-        String jsonBody = getRequestBody(webRequest);
+        String jsonBody = this.getRequestBody(webRequest);
         JSONObject jsonObject = JSON.parseObject(jsonBody);
         if (jsonObject == null) {
             throw new QmParamNullException(TransmitConfiguration.requestKey);

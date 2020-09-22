@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.starmcc.qmframework.config.AesConfiguration;
 import com.starmcc.qmframework.config.TransmitConfiguration;
 import com.starmcc.qmframework.tools.operation.QmAesTools;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,8 +52,8 @@ public class QmRequestWrapper extends HttpServletRequestWrapper {
         }
         LOG.debug(sbf.toString());
         // 日志打印结束
-        String bodyTemp = getBodyString(request);
-        body = getBodyByAes(bodyTemp).getBytes(Charset.forName("UTF-8"));
+        String bodyTemp = this.getBodyString(request);
+        body = this.getBodyByAes(bodyTemp).getBytes(Charset.forName("UTF-8"));
     }
 
     /**
@@ -62,20 +63,25 @@ public class QmRequestWrapper extends HttpServletRequestWrapper {
      * @return json
      */
     private String getBodyByAes(String body) {
-        if ("".equals(body.trim())) {
-            return body;
+        if (StringUtils.isBlank(body)) {
+            return "";
         }
-        JSONObject jsonObject = JSONObject.parseObject(body);
-        String json = jsonObject.getString(TransmitConfiguration.responseKey);
+        if (StringUtils.isNotBlank(TransmitConfiguration.requestKey)) {
+            JSONObject jsonObject = JSONObject.parseObject(body);
+            body = jsonObject.getString(TransmitConfiguration.requestKey);
+            if (StringUtils.isBlank(body)) {
+                return "";
+            }
+        }
         if (AesConfiguration.start) {
             try {
-                json = QmAesTools.decryptAES(json);
+                body = QmAesTools.decryptAES(body);
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
             }
         }
-        return json;
+        return body;
     }
 
     /**

@@ -6,11 +6,9 @@ import com.starmcc.qmframework.config.AesConfiguration;
 import com.starmcc.qmframework.config.TransmitConfiguration;
 import com.starmcc.qmframework.exception.QmFrameException;
 import com.starmcc.qmframework.tools.operation.QmAesTools;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 父类Controller, 编写Controller请继承该类。
@@ -113,25 +111,31 @@ public class QmController {
     }
 
     /**
-     * 转换json
+     * 构建响应数据
      *
-     * @param responseMap
+     * @param json
      * @return
      */
     private String parseJsonToResponse(Map<String, Object> responseMap) {
-        //SerializerFeature.WriteMapNullValue设置后,返回Bean时字段为空时默认返回null
-        String data = JSONObject.toJSONString(responseMap, SerializerFeature.WriteMapNullValue);
-        try {
-            if (AesConfiguration.start) {
-                Map<String, String> valueMap = new HashMap<>(16);
-                valueMap.put(TransmitConfiguration.responseKey, QmAesTools.encryptAES(data));
-                return JSONObject.toJSONString(valueMap, SerializerFeature.WriteMapNullValue);
+        // 解析成json字符串
+        String json = JSONObject.toJSONString(responseMap, SerializerFeature.WriteMapNullValue);
+        if (AesConfiguration.start) {
+            // 如果加密，则对json字符串加密
+            try {
+                json = QmAesTools.encryptAES(json);
+            } catch (Exception e) {
+                throw new QmFrameException("加密异常", e);
             }
-        } catch (Exception e) {
-            throw new QmFrameException("加密失败", e);
         }
-        Map<String, Map<String, Object>> valueMap = new LinkedHashMap<>(16);
-        valueMap.put(TransmitConfiguration.responseKey, responseMap);
+        // 不加密逻辑
+        if (StringUtils.isBlank(TransmitConfiguration.responseKey)) {
+            // 如果没有key则直接返回
+            return json;
+        }
+        Map<String, Object> valueMap = new HashMap<>(16);
+        valueMap.put(TransmitConfiguration.responseKey,
+                AesConfiguration.start ? json : responseMap);
         return JSONObject.toJSONString(valueMap, SerializerFeature.WriteMapNullValue);
     }
+
 }
