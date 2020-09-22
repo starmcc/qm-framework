@@ -16,17 +16,17 @@ public class TransmitConfiguration {
     public static String responseKey;
     public static String responseMessageLang;
 
-    @Value("${request.key:value}")
+    @Value("${request.key:}")
     public void setRequestKey(String requestKey) {
         TransmitConfiguration.requestKey = requestKey;
     }
 
-    @Value("${response-key:value}")
+    @Value("${response-key:}")
     public void setResponseKey(String responseKey) {
         TransmitConfiguration.responseKey = responseKey;
     }
 
-    @Value("${response-message-lang:value}")
+    @Value("${response-message-lang:CN}")
     public void setResponseMessageLang(String responseMessageLang) {
         TransmitConfiguration.responseMessageLang = responseMessageLang;
     }
