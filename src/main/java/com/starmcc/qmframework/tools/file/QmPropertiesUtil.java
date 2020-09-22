@@ -10,7 +10,7 @@ import java.util.Properties;
 /**
  * properties工具类，默认读取config.properties配置文件
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午2:09:11
  */
 public class QmPropertiesUtil {

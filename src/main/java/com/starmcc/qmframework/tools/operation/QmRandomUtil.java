@@ -6,7 +6,7 @@ import java.util.UUID;
 /**
  * 随机生成工具类
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午2:06:55
  */
 public class QmRandomUtil {
@@ -16,13 +16,14 @@ public class QmRandomUtil {
      *
      * @return uuid
      */
-    public static String createUUID() {
-        UUID uuid = UUID.randomUUID();
-        String str = uuid.toString();
+    public static String createUuid() {
+        String str = UUID.randomUUID().toString();
         // 去掉"-"符号
-        String temp = str.substring(0, 8) + str.substring(9, 13) + str.substring(14, 18) + str.substring(19, 23)
+        return str.substring(0, 8)
+                + str.substring(9, 13)
+                + str.substring(14, 18)
+                + str.substring(19, 23)
                 + str.substring(24);
-        return temp;
     }
 
     /**

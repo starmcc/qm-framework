@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Redis客户端
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午2:33:49
  */
 public final class QmRedisClient {

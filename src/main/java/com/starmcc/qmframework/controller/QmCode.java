@@ -6,7 +6,7 @@ import com.starmcc.qmframework.config.TransmitConfiguration;
 /**
  * 数据请求状态码工具类
  *
- * @Author qm
+ * @Author starmcc
  * @createDate 2018年10月26日 上午12:58:22
  */
 public enum QmCode {

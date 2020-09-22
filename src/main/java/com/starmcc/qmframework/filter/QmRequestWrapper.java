@@ -3,7 +3,7 @@ package com.starmcc.qmframework.filter;
 import com.alibaba.fastjson.JSONObject;
 import com.starmcc.qmframework.config.AesConfiguration;
 import com.starmcc.qmframework.config.TransmitConfiguration;
-import com.starmcc.qmframework.tools.operation.QmAesTools;
+import com.starmcc.qmframework.tools.operation.QmAesUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ import java.util.Enumeration;
 /**
  * qmframework 重写 RequestBody, 并实现AES无缝对称加密
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午1:23:44
  */
 public class QmRequestWrapper extends HttpServletRequestWrapper {
@@ -75,7 +75,7 @@ public class QmRequestWrapper extends HttpServletRequestWrapper {
         }
         if (AesConfiguration.start) {
             try {
-                body = QmAesTools.decryptAES(body);
+                body = QmAesUtil.decryptAes(body);
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;

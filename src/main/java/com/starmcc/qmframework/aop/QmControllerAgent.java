@@ -3,9 +3,9 @@ package com.starmcc.qmframework.aop;
 import org.aspectj.lang.JoinPoint;
 
 /**
- * 请求方法切入代理控制器
+ * 方法切入代理控制器
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2019/1/7 0:57
  */
 public interface QmControllerAgent {

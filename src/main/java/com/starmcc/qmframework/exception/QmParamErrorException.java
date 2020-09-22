@@ -3,7 +3,7 @@ package com.starmcc.qmframework.exception;
 /**
  * 参数解析错误时触发该异常!
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2019/4/19 12:34
  */
 public class QmParamErrorException extends RuntimeException {

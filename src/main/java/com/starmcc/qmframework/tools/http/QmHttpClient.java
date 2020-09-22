@@ -19,7 +19,7 @@ import java.util.*;
 /**
  * QmHttpClient工具类
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午2:01:35
  */
 public class QmHttpClient {

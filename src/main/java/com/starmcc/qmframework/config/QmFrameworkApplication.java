@@ -4,10 +4,13 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.starmcc.qmframework.body.JsonPathArgumentResolver;
+import com.starmcc.qmframework.event.QmCommonListener;
+import com.starmcc.qmframework.event.QmEventManager;
 import com.starmcc.qmframework.filter.InitFilter;
 import com.starmcc.qmframework.tools.spring.QmSpringManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -28,13 +31,15 @@ import java.util.List;
  * QmFramework 核心组合配置类
  * 请在标注了@SpringBootApplication启动类中继承他。
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午1:33:11
  */
 @Import({TransmitConfiguration.class,
         VersionConfiguration.class,
         SpecialConfiguration.class,
-        AesConfiguration.class})
+        AesConfiguration.class,
+        AgentConfiguration.class,
+})
 public class QmFrameworkApplication implements WebMvcConfigurer {
 
     private static final Logger LOG = LoggerFactory.getLogger(QmFrameworkApplication.class);
@@ -110,6 +115,17 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
         bean.setOrder(0);
         return bean;
     }
+
+    @Bean
+    public QmCommonListener initEventListener(){
+        return new QmCommonListener();
+    }
+
+    @Bean
+    public QmEventManager initListener(){
+        return new QmEventManager();
+    }
+
 
     /**
      * 配置消息转换器--这里我用的是alibaba fastjson

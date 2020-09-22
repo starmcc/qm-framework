@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * 特殊请求配置
  *
- * @Author: qm
- * @Date: 2019/8/30 14:49
+ * @Author starmcc
+ * @Date 2019/8/30 14:49
  */
 @ConfigurationProperties(prefix = "qmframework.special", ignoreUnknownFields = false)
 public class SpecialConfiguration {

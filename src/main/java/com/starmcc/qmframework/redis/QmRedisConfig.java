@@ -12,7 +12,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 /**
  * 初始化qmframework-redis
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午2:34:08
  */
 public class QmRedisConfig {

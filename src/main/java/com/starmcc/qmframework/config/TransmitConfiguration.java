@@ -6,8 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 请求配置
  *
- * @Author: qm
- * @Date: 2019/8/29 17:21
+ * @Author starmcc
+ * @Date 2019/8/29 17:21
  */
 @ConfigurationProperties(prefix = "qmframework.transmit", ignoreUnknownFields = false)
 public class TransmitConfiguration {

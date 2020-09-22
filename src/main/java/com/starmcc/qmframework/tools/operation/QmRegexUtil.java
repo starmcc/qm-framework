@@ -13,10 +13,10 @@ import java.util.regex.Pattern;
 /**
  * 字符串正则验证工具
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2019年5月5日11:38:33
  */
-public class QmRegexUtils {
+public class QmRegexUtil {
 
     /**
      * properties读取对象
@@ -25,7 +25,7 @@ public class QmRegexUtils {
     /**
      * 打印日志工具
      */
-    private final static Logger LOG = LoggerFactory.getLogger(QmRegexUtils.class);
+    private final static Logger LOG = LoggerFactory.getLogger(QmRegexUtil.class);
 
     private static boolean newOld = true;
 
@@ -35,12 +35,12 @@ public class QmRegexUtils {
         try {
             // 读取properties文件,使用InputStreamReader字符流防止文件中出现中文导致乱码
             inStream = new InputStreamReader
-                    (QmRegexUtils.class.getClassLoader().getResourceAsStream("config.properties"),
+                    (QmRegexUtil.class.getClassLoader().getResourceAsStream("config.properties"),
                             "UTF-8");
             if (inStream == null){
-                QmRegexUtils.newOld = false;
+                QmRegexUtil.newOld = false;
                 inStream = new InputStreamReader
-                        (QmRegexUtils.class.getClassLoader().getResourceAsStream("verify.properties"),
+                        (QmRegexUtil.class.getClassLoader().getResourceAsStream("verify.properties"),
                                 "UTF-8");
             }
             properties.load(inStream);
@@ -76,7 +76,7 @@ public class QmRegexUtils {
         }
         try {
             String regex;
-            if (QmRegexUtils.newOld){
+            if (QmRegexUtil.newOld){
                 regex = PRO.getProperty( "regex." + node);
             }else {
                 regex = PRO.getProperty(node);

@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * 文件读取工具
  *
- * @Author qm
+ * @Author starmcc
  */
 public class QmFileUtil {
 

@@ -1,5 +1,6 @@
 package com.starmcc.qmframework.aop;
 
+import com.starmcc.qmframework.config.AgentConfiguration;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -12,17 +13,14 @@ import java.util.Arrays;
 /**
  * 接口日志，返回请求时间，参数，返回值等信息。
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午1:34:28
  */
 @Aspect
 public class QmControllerAgentAgency {
 
     private static final Logger LOG = LoggerFactory.getLogger(QmControllerAgentAgency.class);
-    /**
-     * 是否打印日志
-     */
-    private boolean isPrintLogger;
+
     /**
      * 记录请求时间
      */
@@ -35,20 +33,11 @@ public class QmControllerAgentAgency {
 
     }
 
-    /**
-     * 是否打印日志
-     *
-     * @param isPrintLogger 是否打印
-     */
-    public QmControllerAgentAgency(boolean isPrintLogger) {
-        this.isPrintLogger = isPrintLogger;
-    }
-
 
     /**
      * 切入点范围
      */
-    @Pointcut("this(com.starmcc.qmframework.controller.QmController)")
+    @Pointcut("@annotation(com.starmcc.qmframework.aop.QmAgent)")
     public void qmPointcut() {
     }
 
@@ -75,15 +64,13 @@ public class QmControllerAgentAgency {
         if (null != qmControllerAgent) {
             qmControllerAgent.before(jp);
         }
-        if (isPrintLogger) {
+        if (AgentConfiguration.log) {
             // getTarget得到被代理的目标对象(要切入的目标对象)
-            LOG.info("※※※※※※※※※※※※※※※※※※");
-            LOG.info("执行位置:" + jp.getTarget().getClass().getName());
             // getSignature得到被代理的目标对象的方法名(返回被切入的目标方法名)
-            LOG.info("执行方法:[" + jp.getSignature().getName() + "]");
+            LOG.debug("执行位置:{}.{}", jp.getTarget().getClass().getName(),
+                    jp.getSignature().getName());
             // Arrays.toString(jp.getArgs())获得目标方法的参数列表
             LOG.debug("参数列表:" + Arrays.toString(jp.getArgs()));
-            LOG.info("※※※※※※※※※※※※※※※※※※");
         }
     }
 
@@ -99,10 +86,10 @@ public class QmControllerAgentAgency {
         if (null != qmControllerAgent) {
             qmControllerAgent.afterReturning(jp, result, time);
         }
-        if (isPrintLogger) {
-            LOG.debug("※※※执行结果:[" + result + "]※※※");
+        if (AgentConfiguration.log) {
+            LOG.debug("※※※执行结果:{}", result);
             time = System.currentTimeMillis() - starTime;
-            LOG.info("※※※执行耗时：" + time + "/ms※※※");
+            LOG.info("※※※执行耗时：{}/ms", time);
         }
     }
 

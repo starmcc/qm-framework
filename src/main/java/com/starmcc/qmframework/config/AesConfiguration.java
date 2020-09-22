@@ -6,8 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * AES配置
  *
- * @Author: qm
- * @Date: 2019/8/29 17:52
+ * @Author starmcc
+ * @Date 2019/8/29 17:52
  */
 @ConfigurationProperties(prefix = "qmframework.aes", ignoreUnknownFields = false)
 public class AesConfiguration {
@@ -22,7 +22,7 @@ public class AesConfiguration {
         AesConfiguration.start = start;
     }
 
-    @Value("${key:ohiah2019sDShdieub51h8910s}")
+    @Value("${key:ohiah2020sDShdieub51h8910s}")
     public void setKey(String key) {
         AesConfiguration.key = key;
     }

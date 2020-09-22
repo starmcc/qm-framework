@@ -10,7 +10,7 @@ import org.springframework.util.AntPathMatcher;
 /**
  * Spring工具管理器
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午2:11:03
  */
 public class QmSpringManager implements ApplicationContextAware {
@@ -22,7 +22,7 @@ public class QmSpringManager implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         if (null == QmSpringManager.applicationContext) {
             QmSpringManager.applicationContext = applicationContext;
-            LOG.info("※※※※※※QmSpringManager设置ApplicationContext成功※※※※※※");
+            LOG.info("※※※※※※QmSpringManager注入ApplicationContext成功※※※※※※");
         }
     }
 

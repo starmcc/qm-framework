@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * qmframework请求json数据解析注解
  *
- * @Author: qm
+ * @Author starmcc
  * @Date 2018年11月30日14:46:28
  */
 @Target(ElementType.PARAMETER)//使用在参数上

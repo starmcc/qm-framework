@@ -18,7 +18,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * 该过滤器主要实现版本控制、重写RequestBody、实现AES对称无痕解密
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午1:15:27
  */
 public class InitFilter extends QmController implements Filter {

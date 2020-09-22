@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * 验证码生成器
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午2:12:12
  */
 public class QmValidateCodeUtil {

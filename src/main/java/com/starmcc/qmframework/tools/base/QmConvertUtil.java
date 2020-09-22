@@ -16,8 +16,8 @@ import java.util.Map;
 /**
  * Map and Bean Tools
  *
- * @Author: qm
- * @Date: 2019/7/17 17:33
+ * @Author starmcc
+ * @Date 2019/7/17 17:33
  */
 public class QmConvertUtil {
     /**

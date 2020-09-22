@@ -15,11 +15,11 @@ import java.util.Date;
 /**
  * AES对称加密技术
  *
- * @Author qm
+ * @Author starmcc
  */
-public class QmAesTools {
+public class QmAesUtil {
 
-    private static final Logger LOG = LoggerFactory.getLogger(QmAesTools.class);
+    private static final Logger LOG = LoggerFactory.getLogger(QmAesUtil.class);
 
     /**
      * 加密封装(使用配置的key和次数)
@@ -28,11 +28,11 @@ public class QmAesTools {
      * @return
      * @throws Exception
      */
-    public static String encryptAES(String data) throws Exception {
+    public static String encryptAes(String data) throws Exception {
         Date date = new Date();
         String str = data;
         for (int i = 0; i < AesConfiguration.number; i++) {
-            str = encryptAES(str, AesConfiguration.key);
+            str = encryptAes(str, AesConfiguration.key);
         }
         LOG.debug("加密用时：" + (System.currentTimeMillis() - date.getTime()));
         return str;
@@ -46,11 +46,11 @@ public class QmAesTools {
      * @return
      * @throws Exception
      */
-    public static String decryptAES(String data) throws Exception {
+    public static String decryptAes(String data) throws Exception {
         Date date = new Date();
         String str = data;
         for (int i = 0; i < AesConfiguration.number; i++) {
-            str = decryptAES(str, AesConfiguration.key);
+            str = decryptAes(str, AesConfiguration.key);
         }
         LOG.debug("解密用时：" + (System.currentTimeMillis() - date.getTime()));
         return str;
@@ -65,11 +65,11 @@ public class QmAesTools {
      * @return
      * @throws Exception
      */
-    public static String encryptAES(String data, int num, String key) throws Exception {
+    public static String encryptAes(String data, int num, String key) throws Exception {
         Date date = new Date();
         String str = data;
         for (int i = 0; i < num; i++) {
-            str = encryptAES(str, key);
+            str = encryptAes(str, key);
         }
         LOG.debug("加密用时：" + (System.currentTimeMillis() - date.getTime()));
         return str;
@@ -84,11 +84,11 @@ public class QmAesTools {
      * @return
      * @throws Exception
      */
-    public static String decryptAES(String data, int num, String key) throws Exception {
+    public static String decryptAes(String data, int num, String key) throws Exception {
         Date date = new Date();
         String str = data;
         for (int i = 0; i < num; i++) {
-            str = decryptAES(str, key);
+            str = decryptAes(str, key);
         }
         LOG.debug("解密用时：" + (System.currentTimeMillis() - date.getTime()));
         return str;
@@ -103,7 +103,7 @@ public class QmAesTools {
      * @return
      * @throws Exception
      */
-    private static String encryptAES(String data, String key) throws Exception {
+    private static String encryptAes(String data, String key) throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
         SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
         secureRandom.setSeed(key.getBytes(AesConfiguration.encoding));
@@ -126,7 +126,7 @@ public class QmAesTools {
      * @return
      * @throws Exception
      */
-    private static String decryptAES(String data, String key) throws Exception {
+    private static String decryptAes(String data, String key) throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
         SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
         secureRandom.setSeed(key.getBytes(AesConfiguration.encoding));

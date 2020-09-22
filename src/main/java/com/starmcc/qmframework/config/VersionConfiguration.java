@@ -6,8 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * 版本配置
  *
- * @Author: qm
- * @Date: 2019/8/29 17:49
+ * @Author starmcc
+ * @Date 2019/8/29 17:49
  */
 @ConfigurationProperties(prefix = "qmframework.version", ignoreUnknownFields = false)
 public class VersionConfiguration {

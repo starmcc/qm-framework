@@ -27,7 +27,7 @@ import java.util.Set;
 /**
  * V1.0 Description: 自定义解析json数据
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年9月10日
  */
 public class JsonPathArgumentResolver extends QmController implements HandlerMethodArgumentResolver {

@@ -2,7 +2,7 @@ package com.starmcc.qmframework.exception;
 
 
 import com.starmcc.qmframework.controller.QmCode;
-import com.starmcc.qmframework.controller.QmController;
+import com.starmcc.qmframework.controller.QmResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,13 +18,13 @@ import java.io.IOException;
 /**
  * 全局异常处理、将程序中可能出现的异常进行捕获，返回JSON格式的错误信息。
  *
- * @Author qm
+ * @Author starmcc
  * @Date 2018年11月24日 上午1:30:20
  */
 @ControllerAdvice
 @Controller
 @RequestMapping(value = "/error")
-public class QmExceptionHandler extends QmController {
+public class QmExceptionHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(QmExceptionHandler.class);
 
@@ -34,7 +34,7 @@ public class QmExceptionHandler extends QmController {
                                                          Exception e) {
         LOG.info("请求方式错误,请核实请求方式 `GET` and `POST`");
         response.setStatus(200);
-        return super.sendJSON(QmCode._405);
+        return QmResult.sendJson(QmCode._405);
     }
 
     @ExceptionHandler(QmParamNullException.class)
@@ -44,7 +44,7 @@ public class QmExceptionHandler extends QmController {
         LOG.info("缺少某些请求参数,请核实请求参数是否正确!");
         e.printStackTrace();
         response.setStatus(200);
-        return super.sendJSON(QmCode._100);
+        return QmResult.paramNull();
     }
 
     @ExceptionHandler(QmParamErrorException.class)
@@ -53,7 +53,7 @@ public class QmExceptionHandler extends QmController {
                                         Exception e) {
         LOG.info("请求参数错误,请核实请求参数是否正确!");
         response.setStatus(200);
-        return super.sendJSON(QmCode._101);
+        return QmResult.paramFail();
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
@@ -61,7 +61,7 @@ public class QmExceptionHandler extends QmController {
     public String httpMediaTypeNotSupportedException(HttpServletResponse response,
                                                      Exception e) {
         response.setStatus(200);
-        return super.sendJSON(QmCode._415);
+        return QmResult.sendJson(QmCode._415);
     }
 
 
@@ -72,7 +72,7 @@ public class QmExceptionHandler extends QmController {
                                   Exception e) throws IOException {
         LOG.info("请求地址错误,请核实请求地址是否正确!");
         response.setStatus(200);
-        return super.sendJSON(QmCode._404);
+        return QmResult.sendJson(QmCode._404);
     }
 
 
@@ -82,7 +82,7 @@ public class QmExceptionHandler extends QmController {
         LOG.info("服务器遇到了错误,请检查相关问题!");
         e.printStackTrace();
         response.setStatus(200);
-        return super.sendJSON(QmCode._500);
+        return QmResult.error();
     }
 
 }

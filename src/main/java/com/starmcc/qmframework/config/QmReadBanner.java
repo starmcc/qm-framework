@@ -10,8 +10,8 @@ import java.io.InputStreamReader;
 /**
  * 读取Banner
  *
- * @Author: qm
- * @Date: 2019/6/3 15:56
+ * @Author starmcc
+ * @Date 2019/6/3 15:56
  */
 public class QmReadBanner {
 
