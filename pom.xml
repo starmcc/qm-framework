@@ -22,7 +22,7 @@
 
     <properties>
         <!-- 项目版本 -->
-        <project.version>2.0.0</project.version>
+        <project.version>2.0.1</project.version>
         <!-- 构建编码 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- JDK版本 -->
@@ -44,13 +44,13 @@
         <profile>
             <id>release</id>
             <properties>
-                <project.version>2.0.0-RELEASE</project.version>
+                <project.version>2.0.1-RELEASE</project.version>
             </properties>
         </profile>
         <profile>
             <id>dev</id>
             <properties>
-                <project.version>2.0.0-SNAPSHOT</project.version>
+                <project.version>2.0.1-SNAPSHOT</project.version>
             </properties>
             <activation>
                 <!-- 设置默认激活这个配置 -->

@@ -192,7 +192,7 @@ public class JsonPathArgumentResolver extends QmController implements HandlerMet
                 return number.byteValue();
             }
         } else if (parameterType == Boolean.class) {
-            return value.toString();
+            return Boolean.valueOf(value.toString());
         } else if (parameterType == Character.class) {
             return value.toString().charAt(0);
         }
