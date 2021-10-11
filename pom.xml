@@ -43,8 +43,8 @@
         <springboot.version>2.5.5</springboot.version>
         <!-- 打包插件管理 -->
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <build.gpg.plugin.version>1.6</build.gpg.plugin.version>
-        <build.javadoc.plugin.version>2.10.3</build.javadoc.plugin.version>
+        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
     </properties>
 
     <!-- licenses证书 -->
@@ -96,23 +96,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- 打包相关 -->
-    <build>
-        <plugins>
-            <!-- java版本 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-
-
-        </plugins>
-    </build>
     <!-- 依赖库 -->
     <dependencies>
         <dependency>
@@ -174,14 +157,14 @@
         <profile>
             <id>release</id>
             <properties>
-                <project-full.version>${qm-framework.version}-RELEASE</project-full.version>
+                <qm-framework-full.version>${qm-framework.version}-RELEASE</qm-framework-full.version>
             </properties>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>${build.javadoc.plugin.version}</version>
+                        <version>${maven-javadoc-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -213,7 +196,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>${build.gpg.plugin.version}</version>
+                        <version>${maven-gpg-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -230,7 +213,7 @@
         <profile>
             <id>dev</id>
             <properties>
-                <project-full.version>${qm-framework.version}-SNAPSHOT</project-full.version>
+                <qm-framework-full.version>${qm-framework.version}-SNAPSHOT</qm-framework-full.version>
             </properties>
             <activation>
                 <!-- 设置默认激活这个配置 -->
@@ -238,4 +221,20 @@
             </activation>
         </profile>
     </profiles>
+
+    <!-- 打包相关 -->
+    <build>
+        <plugins>
+            <!-- java版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
