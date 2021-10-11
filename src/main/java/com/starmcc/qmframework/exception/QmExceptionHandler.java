@@ -32,7 +32,7 @@ public class QmExceptionHandler {
     @ResponseBody
     public String httpRequestMethodNotSupportedException(HttpServletResponse response,
                                                          Exception e) {
-        LOG.info("请求方式错误,请核实请求方式 `GET` and `POST`");
+        LOG.warn("请求方式错误,请核实请求方式 `GET` and `POST`");
         response.setStatus(200);
         return QmResult.sendJson(QmCode._405);
     }
@@ -41,8 +41,7 @@ public class QmExceptionHandler {
     @ResponseBody
     public String qmParamNullException(HttpServletResponse response,
                                        Exception e) {
-        LOG.info("缺少某些请求参数,请核实请求参数是否正确!");
-        e.printStackTrace();
+        LOG.warn("缺少某些请求参数,请核实请求参数是否正确!");
         response.setStatus(200);
         return QmResult.paramNull();
     }
@@ -51,7 +50,7 @@ public class QmExceptionHandler {
     @ResponseBody
     public String qmParamErrorException(HttpServletResponse response,
                                         Exception e) {
-        LOG.info("请求参数错误,请核实请求参数是否正确!");
+        LOG.warn("请求参数错误,请核实请求参数是否正确!");
         response.setStatus(200);
         return QmResult.paramFail();
     }
@@ -60,6 +59,7 @@ public class QmExceptionHandler {
     @ResponseBody
     public String httpMediaTypeNotSupportedException(HttpServletResponse response,
                                                      Exception e) {
+        LOG.warn("HttpMediaTypeNotSupportedException异常 {}", e);
         response.setStatus(200);
         return QmResult.sendJson(QmCode._415);
     }
@@ -70,7 +70,7 @@ public class QmExceptionHandler {
     @ResponseBody
     public String notFoundPage404(HttpServletResponse response,
                                   Exception e) throws IOException {
-        LOG.info("请求地址错误,请核实请求地址是否正确!");
+        LOG.warn("请求地址错误,请核实请求地址是否正确!");
         response.setStatus(200);
         return QmResult.sendJson(QmCode._404);
     }
@@ -79,7 +79,7 @@ public class QmExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public String defaultException(HttpServletResponse response, Exception e) throws IOException {
-        LOG.info("服务器遇到了错误,请检查相关问题!");
+        LOG.error("服务器遇到了错误,请检查相关问题!");
         e.printStackTrace();
         response.setStatus(200);
         return QmResult.error();

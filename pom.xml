@@ -7,8 +7,8 @@
     <groupId>com.starmcc</groupId>
     <artifactId>qm-framework</artifactId>
     <packaging>jar</packaging>
-    <version>${project.version}</version>
-    <url>http://www.starmcc.com/qm-framework/</url>
+    <version>2.1.0-${project.env}</version>
+    <url>https://www.starmcc.com/qm-framework</url>
 
     <description>
         springboot based on a series of packaging framework.
@@ -20,80 +20,20 @@
         thank you for using it.
     </description>
 
+    <parent>
+        <groupId>com.starmcc</groupId>
+        <artifactId>starmcc-dependencies</artifactId>
+        <version>1.0.0-RELEASE</version>
+        <relativePath/>
+    </parent>
+
     <properties>
-        <!-- 项目版本 -->
-        <project.version>2.0.1</project.version>
-        <!-- 构建编码 -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- JDK版本 -->
-        <jdk.version>1.8</jdk.version>
-
-        <!-- 版本管理 -->
-        <httpclient.version>4.5.2</httpclient.version>
-        <fastjson.version>1.2.58</fastjson.version>
+        <httpclient.version>4.5.13</httpclient.version>
+        <fastjson.version>1.2.78</fastjson.version>
         <commons-io.version>2.6</commons-io.version>
-        <commons-text.version>1.6</commons-text.version>
-        <springboot.version>2.3.4.RELEASE</springboot.version>
-
-        <!-- 打包插件管理 -->
-        <build.gpg.plugin.version>1.6</build.gpg.plugin.version>
-        <build.javadoc.plugin.version>2.10.3</build.javadoc.plugin.version>
+        <commons-text.version>1.9</commons-text.version>
+        <springboot.version>2.5.5</springboot.version>
     </properties>
-
-    <profiles>
-        <profile>
-            <id>release</id>
-            <properties>
-                <project.version>2.0.1-RELEASE</project.version>
-            </properties>
-        </profile>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <project.version>2.0.1-SNAPSHOT</project.version>
-            </properties>
-            <activation>
-                <!-- 设置默认激活这个配置 -->
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-    </profiles>
-
-
-    <!-- licenses证书 -->
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <!-- scm -->
-    <scm>
-        <url>https://github.com/starmcc/qm-framework.git</url>
-        <connection>https://github.com/starmcc/qm-framework.git</connection>
-        <developerConnection>https://github.com/starmcc/qm-framework.git</developerConnection>
-    </scm>
-
-    <developers>
-        <developer>
-            <name>starmcc</name>
-            <email>starmcc@yeah.net</email>
-        </developer>
-    </developers>
-
-    <!-- oss提交maven -->
-    <distributionManagement>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <!-- spring boot 父类依赖 -->
     <dependencyManagement>
@@ -109,67 +49,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- 打包相关 -->
-    <build>
-        <plugins>
-            <!-- java版本 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
-            </plugin>
-            <!-- 这是spring boot devtool plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${build.javadoc.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <!-- 该处屏蔽jdk1.8后javadoc的严格校验 -->
-                        <configuration>
-                            <additionalparam>-Xdoclint:none</additionalparam>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- 源码插件 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--签名插件-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>${build.gpg.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
     <!-- 依赖库 -->
     <dependencies>
         <dependency>

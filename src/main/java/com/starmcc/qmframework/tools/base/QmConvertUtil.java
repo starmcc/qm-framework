@@ -48,13 +48,15 @@ public class QmConvertUtil {
             }
             return obj;
         } catch (IntrospectionException e) {
-            throw new QmFrameException("IntrospectionException 分析类属性失败!");
+            throw new QmFrameException("IntrospectionException 分析类属性失败!", e);
         } catch (InstantiationException e) {
-            throw new QmFrameException("IllegalAccessException 实例化 JavaBean 失败!");
+            throw new QmFrameException("IllegalAccessException 实例化 JavaBean 失败!", e);
         } catch (IllegalAccessException e) {
-            throw new QmFrameException("IllegalAccessException 实例化 JavaBean 失败!");
+            throw new QmFrameException("IllegalAccessException 实例化 JavaBean 失败!", e);
         } catch (InvocationTargetException e) {
-            throw new QmFrameException("InvocationTargetException 调用属性的 setter 方法失败!");
+            throw new QmFrameException("InvocationTargetException 调用属性的 setter 方法失败!", e);
+        } catch (Exception e) {
+            throw new QmFrameException("其他异常", e);
         }
     }
 
@@ -104,11 +106,13 @@ public class QmConvertUtil {
             }
             return returnMap;
         } catch (IntrospectionException e) {
-            throw new QmFrameException("IntrospectionException 分析类属性失败!");
+            throw new QmFrameException("IntrospectionException 分析类属性失败!", e);
         } catch (IllegalAccessException e) {
-            throw new QmFrameException("IllegalAccessException 实例化 JavaBean 失败!");
+            throw new QmFrameException("IllegalAccessException 实例化 JavaBean 失败!", e);
         } catch (InvocationTargetException e) {
-            throw new QmFrameException("InvocationTargetException 调用属性的 setter 方法失败!");
+            throw new QmFrameException("InvocationTargetException 调用属性的 setter 方法失败!", e);
+        }catch (Exception e) {
+            throw new QmFrameException("其他异常", e);
         }
     }
 
