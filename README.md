@@ -32,7 +32,7 @@
 
 * java - JDK 1.8 above
 * Maven 2.0 above
-* SpringBoot 2.3.4 above
+* SpringBoot 2.5.5 above
 
 ## 4. Package Content
 
