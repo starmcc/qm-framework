@@ -178,7 +178,6 @@
             <!-- 该依赖必须支持 -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <!-- aop -->
