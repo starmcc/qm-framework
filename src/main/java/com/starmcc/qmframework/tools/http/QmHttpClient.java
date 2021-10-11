@@ -26,12 +26,234 @@ public class QmHttpClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(QmHttpClient.class);
 
-    private final static String POST = "post";
-    private final static String GET = "getQmResponseOut";
+    private final static String POST = "POST";
+    private final static String GET = "GET";
     /**
-     * 默认字符编码
+     * 字符编码
      */
-    private final static String ENCODING = "UTF-8";
+    private final static String ENCODING_UTF_8 = "UTF-8";
+
+
+    /**
+     * POST提交
+     *
+     * @param url      url
+     * @param headers  请求头
+     * @param params   请求参数
+     * @param encoding 编码方式
+     * @return
+     */
+    private static String sendPost(String url,
+                                   Map<String, String> headers,
+                                   Map<String, Object> params,
+                                   String encoding) {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpPost post = new HttpPost(url);
+        if (headers != null && headers.size() != 0) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                post.setHeader(entry.getKey(), entry.getValue());
+            }
+        }
+        if (null != params) {
+            // 处理参数
+            HttpEntity entity = handleParam(params, encoding);
+            // 添加参数
+            post.setEntity(entity);
+        }
+        CloseableHttpResponse response = null;
+        String content = null;
+        try {
+            response = httpClient.execute(post);
+            content = EntityUtils.toString(response.getEntity());
+        } catch (Exception e) {
+            LOG.error("请求异常: {}", e);
+        } finally {
+            close(response, httpClient);
+        }
+        LOG.info(content);
+        return content;
+    }
+
+    /**
+     * GET提交
+     *
+     * @param url      请求url
+     * @param headers  请求头
+     * @param params   请求参数
+     * @param encoding 编码方式
+     * @return 响应数据
+     */
+    private static String sendGet(String url,
+                                  Map<String, String> headers,
+                                  Map<String, Object> params,
+                                  String encoding) {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpGet get = new HttpGet(url);
+        if (null != headers && headers.size() != 0) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                get.setHeader(entry.getKey(), entry.getValue());
+            }
+        }
+        if (null != params) {
+            // 处理参数
+            HttpEntity entity = handleParam(params, encoding);
+            try {
+                String paramStr = EntityUtils.toString(entity);
+                get = new HttpGet(url + "?" + paramStr);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        CloseableHttpResponse response = null;
+        String content = null;
+        try {
+            response = httpClient.execute(get);
+            content = EntityUtils.toString(response.getEntity(), encoding);
+        } catch (Exception e) {
+            LOG.error("请求异常: {}", e);
+        } finally {
+            close(response, httpClient);
+        }
+        LOG.info(content);
+        return content;
+    }
+
+    /**
+     * 处理参数
+     *
+     * @param params   请求参数
+     * @param encoding 请求编码格式
+     * @return HttpEntity
+     */
+    private static HttpEntity handleParam(Map<String, Object> params, String encoding) {
+        List<NameValuePair> pList = new ArrayList<NameValuePair>();
+        Iterator<Map.Entry<String, Object>> entrys = params.entrySet().iterator();
+        while (entrys.hasNext()) {
+            Map.Entry<String, Object> entry = entrys.next();
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            try {
+                // 处理数组
+                Object[] objs = (Object[]) value;
+                for (Object obj : objs) {
+                    pList.add(new BasicNameValuePair(key, obj.toString()));
+                }
+            } catch (Exception e) {
+                // 处理普通类型
+                pList.add(new BasicNameValuePair(key, value.toString()));
+            }
+        }
+        UrlEncodedFormEntity uefEntity = null;
+        try {
+            uefEntity = new UrlEncodedFormEntity(pList, encoding);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return uefEntity;
+    }
+
+    /**
+     * 关闭连接
+     *
+     * @param response   CloseableHttpResponse
+     * @param httpClient CloseableHttpClient
+     */
+    private static void close(CloseableHttpResponse response, CloseableHttpClient httpClient) {
+        try {
+            if (null != response) {
+                response.close();
+            }
+            if (null != httpClient) {
+                httpClient.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ===========================================封装===========================
+
+    /**
+     * 提交请求
+     *
+     * @param method   请求类型
+     * @param url      请求URL
+     * @param headers  请求头
+     * @param params   请求参数
+     * @param encoding 请求编码格式
+     * @return String  响应数据
+     */
+    public static String request(String method, String url,
+                                 Map<String, String> headers, Map<String, Object> params, String encoding) {
+        if (POST.equalsIgnoreCase(method)) {
+            return QmHttpClient.sendPost(url, headers, params, encoding);
+        } else if (GET.equalsIgnoreCase(method)) {
+            return QmHttpClient.sendGet(url, headers, params, encoding);
+        } else {
+            return QmHttpClient.sendGet(url, headers, params, encoding);
+        }
+    }
+
+    /**
+     * 提交请求
+     *
+     * @param method 请求类型
+     * @param url    请求URL
+     * @param params 请求参数
+     * @return String 响应数据
+     */
+    public static String request(String method, String url, Map<String, Object> params) {
+        return QmHttpClient.request(method, url, null, params, ENCODING_UTF_8);
+    }
+
+    /**
+     * 提交请求
+     *
+     * @param method  请求类型
+     * @param url     请求URL
+     * @param headers 请求头
+     * @param params  请求参数
+     * @return String 响应数据
+     */
+    public static String request(String method, String url, Map<String, String> headers, Map<String, Object> params) {
+        return QmHttpClient.request(method, url, headers, params, ENCODING_UTF_8);
+    }
+
+    /**
+     * 提交请求
+     *
+     * @param method   请求类型
+     * @param url      请求URL
+     * @param params   请求参数
+     * @param encoding 请求编码格式
+     * @return String 响应数据
+     */
+    public static String request(String method, String url, Map<String, Object> params, String encoding) {
+        return QmHttpClient.request(method, url, null, params, encoding);
+    }
+
+    @Deprecated
+    public static String send(String method, String url,
+                              Map<String, String> headers, Map<String, Object> params, String encoding) {
+        return QmHttpClient.request(method, url, headers, params, encoding);
+    }
+
+    @Deprecated
+    public static String send(String method, String url, Map<String, Object> params) {
+        return QmHttpClient.send(method, url, null, params, ENCODING_UTF_8);
+    }
+
+    @Deprecated
+    public static String send(String method, String url, Map<String, String> headers, Map<String, Object> params) {
+        return QmHttpClient.send(method, url, headers, params, ENCODING_UTF_8);
+    }
+
+    @Deprecated
+    public static String send(String method, String url, Map<String, Object> params, String encoding) {
+        return QmHttpClient.send(method, url, null, params, encoding);
+    }
+
 
     /**
      * 根据手机号获取手机号归属地
@@ -105,211 +327,5 @@ public class QmHttpClient {
         }
         return ip;
     }
-
-
-    /**
-     * POST提交
-     *
-     * @param url      url
-     * @param headers  请求头
-     * @param params   请求参数
-     * @param encoding 编码方式
-     * @return
-     */
-    private static String sendPost(String url,
-                                   Map<String, String> headers,
-                                   Map<String, Object> params,
-                                   String encoding) {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpPost post = new HttpPost(url);
-        if (headers != null && headers.size() != 0) {
-            for (Map.Entry<String, String> entry : headers.entrySet()) {
-                post.setHeader(entry.getKey(), entry.getValue());
-            }
-        }
-        if (null != params) {
-            // 处理参数
-            HttpEntity entity = handleParam(params, encoding);
-            // 添加参数
-            post.setEntity(entity);
-        }
-        CloseableHttpResponse response = null;
-        String content = null;
-        try {
-            response = httpClient.execute(post);
-            content = EntityUtils.toString(response.getEntity());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close(response, httpClient);
-        }
-        LOG.info(content);
-        return content;
-    }
-
-    /**
-     * GET提交
-     *
-     * @param url      请求url
-     * @param headers  请求头
-     * @param params   请求参数
-     * @param encoding 编码方式
-     * @return 响应数据
-     */
-    private static String sendGet(String url,
-                                  Map<String, String> headers,
-                                  Map<String, Object> params,
-                                  String encoding) {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpGet get = new HttpGet(url);
-        if (null != headers && headers.size() != 0) {
-            for (Map.Entry<String, String> entry : headers.entrySet()) {
-                get.setHeader(entry.getKey(), entry.getValue());
-            }
-        }
-        if (null != params) {
-            // 处理参数
-            HttpEntity entity = handleParam(params, encoding);
-            try {
-                String paramStr = EntityUtils.toString(entity);
-                get = new HttpGet(url + "?" + paramStr);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-        CloseableHttpResponse response = null;
-        String content = null;
-        try {
-            response = httpClient.execute(get);
-            content = EntityUtils.toString(response.getEntity(), encoding);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close(response, httpClient);
-        }
-        LOG.info(content);
-        return content;
-    }
-
-    /**
-     * 处理参数
-     *
-     * @param params   请求参数
-     * @param encoding 请求编码格式
-     * @return HttpEntity
-     */
-    private static HttpEntity handleParam(Map<String, Object> params, String encoding) {
-        List<NameValuePair> pList = new ArrayList<NameValuePair>();
-        Iterator<Map.Entry<String, Object>> entrys = params.entrySet().iterator();
-        while (entrys.hasNext()) {
-            Map.Entry<String, Object> entry = entrys.next();
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            try {
-                // 处理数组
-                Object[] objs = (Object[]) value;
-                for (Object obj : objs) {
-                    pList.add(new BasicNameValuePair(key, obj.toString()));
-                }
-            } catch (Exception e) {
-                // 处理普通类型
-                pList.add(new BasicNameValuePair(key, value.toString()));
-            }
-        }
-        UrlEncodedFormEntity uefEntity = null;
-        try {
-            uefEntity = new UrlEncodedFormEntity(pList, encoding);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return uefEntity;
-    }
-
-    /**
-     * 关闭连接
-     *
-     * @param response   CloseableHttpResponse
-     * @param httpClient CloseableHttpClient
-     */
-    private static void close(CloseableHttpResponse response, CloseableHttpClient httpClient) {
-        try {
-            if (null != response) {
-                response.close();
-            }
-            if (null != httpClient) {
-                httpClient.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // ===========================================封装===========================
-
-    /**
-     * 提交请求
-     *
-     * @param method   请求类型
-     * @param url      请求URL
-     * @param headers  请求头
-     * @param params   请求参数
-     * @param encoding 请求编码格式
-     * @return String  响应数据
-     */
-    public static String send(String method,
-                              String url,
-                              Map<String, String> headers,
-                              Map<String, Object> params,
-                              String encoding) {
-        if (POST.equalsIgnoreCase(method)) {
-            return QmHttpClient.sendPost(url, headers, params, encoding);
-        } else if (GET.equalsIgnoreCase(method)) {
-            return QmHttpClient.sendGet(url, headers, params, encoding);
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * 提交请求
-     *
-     * @param method 请求类型
-     * @param url    请求URL
-     * @param params 请求参数
-     * @return String 响应数据
-     */
-    public static String send(String method, String url, Map<String, Object> params) {
-        return QmHttpClient.send(method, url, null, params, ENCODING);
-    }
-
-    /**
-     * 提交请求
-     *
-     * @param method 请求类型
-     * @param url    请求URL
-     * @param params 请求参数
-     * @return String 响应数据
-     */
-    public static String send(String method,
-                              String url,
-                              Map<String, String> headers,
-                              Map<String, Object> params) {
-        return QmHttpClient.send(method, url, headers, params, ENCODING);
-    }
-
-
-    /**
-     * 提交请求
-     *
-     * @param method 请求类型
-     * @param url    请求URL
-     * @param params 请求参数
-     * @return String 响应数据
-     */
-    public static String send(String method, String url, Map<String, Object> params, String encoding) {
-        return QmHttpClient.send(method, url, null, params, encoding);
-    }
-
 
 }

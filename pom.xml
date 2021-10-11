@@ -7,7 +7,7 @@
     <groupId>com.starmcc</groupId>
     <artifactId>qm-framework</artifactId>
     <packaging>jar</packaging>
-    <version>${project.version}</version>
+    <version>${qm-framework-full.version}</version>
     <url>http://www.starmcc.com/qm-framework/</url>
 
     <description>
@@ -22,20 +22,21 @@
 
     <properties>
         <!-- 项目版本 -->
-        <project.version>2.0.1</project.version>
+        <qm-framework.version>2.1.0</qm-framework.version>
+        <qm-framework-full.version>${qm-framework.version}</qm-framework-full.version>
         <!-- 构建编码 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- JDK版本 -->
         <jdk.version>1.8</jdk.version>
 
         <!-- 版本管理 -->
-        <httpclient.version>4.5.2</httpclient.version>
-        <fastjson.version>1.2.58</fastjson.version>
+        <httpclient.version>4.5.13</httpclient.version>
+        <fastjson.version>1.2.78</fastjson.version>
         <commons-io.version>2.6</commons-io.version>
-        <commons-text.version>1.6</commons-text.version>
-        <springboot.version>2.3.4.RELEASE</springboot.version>
-
+        <commons-text.version>1.9</commons-text.version>
+        <springboot.version>2.5.5</springboot.version>
         <!-- 打包插件管理 -->
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <build.gpg.plugin.version>1.6</build.gpg.plugin.version>
         <build.javadoc.plugin.version>2.10.3</build.javadoc.plugin.version>
     </properties>
@@ -44,13 +45,13 @@
         <profile>
             <id>release</id>
             <properties>
-                <project.version>2.0.1-RELEASE</project.version>
+                <project-full.version>${qm-framework.version}-RELEASE</project-full.version>
             </properties>
         </profile>
         <profile>
             <id>dev</id>
             <properties>
-                <project.version>2.0.1-SNAPSHOT</project.version>
+                <project-full.version>${qm-framework.version}-SNAPSHOT</project-full.version>
             </properties>
             <activation>
                 <!-- 设置默认激活这个配置 -->
@@ -144,6 +145,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -176,6 +178,7 @@
             <!-- 该依赖必须支持 -->
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- aop -->

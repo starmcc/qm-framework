@@ -2,10 +2,9 @@ package com.starmcc.qmframework.redis;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -86,7 +85,9 @@ public final class QmRedisClient {
                 if (key.length == 1) {
                     return qmRedisClient.redisTemplate.delete(key[0]);
                 } else {
-                    Long res = qmRedisClient.redisTemplate.delete(CollectionUtils.arrayToList(key));
+                    List<String> keys = new ArrayList<>();
+                    Collections.addAll(keys, key);
+                    Long res = qmRedisClient.redisTemplate.delete(keys);
                     if (res < 1) {
                         return false;
                     }
