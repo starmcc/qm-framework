@@ -1,10 +1,9 @@
 package com.starmcc.qmframework.exception;
 
 /**
+ * @author starmcc
+ * @version 2019/4/19 12:34
  * 参数为空时触发该异常！
- *
- * @Author starmcc
- * @Date 2019/4/19 12:34
  */
 public class QmParamNullException extends RuntimeException {
 

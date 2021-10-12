@@ -16,10 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午1:30:20
  * 全局异常处理、将程序中可能出现的异常进行捕获，返回JSON格式的错误信息。
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午1:30:20
  */
 @ControllerAdvice
 @Controller

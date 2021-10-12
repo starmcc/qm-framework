@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @Author starmcc
- * @Date 2020/9/22 16:35
- * @Description AOP 配置
+ * @author starmcc
+ * @version 2020/9/22 16:35
+ * AOP 配置
  */
 @ConfigurationProperties(prefix = "qmframework.agent", ignoreUnknownFields = false)
 public class AgentConfiguration {

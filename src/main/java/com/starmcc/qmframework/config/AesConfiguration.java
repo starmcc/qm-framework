@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
+ * @author starmcc
+ * @version 2019/8/29 17:52
  * AES配置
- *
- * @Author starmcc
- * @Date 2019/8/29 17:52
  */
 @ConfigurationProperties(prefix = "qmframework.aes", ignoreUnknownFields = false)
 public class AesConfiguration {

@@ -7,9 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ * @author starmcc
  * 超详细的时间工具类
- *
- * @Author Administrator
  */
 public class QmDateUtil {
 
@@ -23,7 +22,7 @@ public class QmDateUtil {
     /**
      * 获取当天开始时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getDayBegin() {
         Calendar cal = Calendar.getInstance();
@@ -42,7 +41,7 @@ public class QmDateUtil {
     /**
      * 获取当天结束时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getDayEnd() {
         Calendar cal = Calendar.getInstance();
@@ -59,7 +58,7 @@ public class QmDateUtil {
     /**
      * 获取昨天开始时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getBeginDayOfYesterday() {
         Calendar cal = Calendar.getInstance();
@@ -74,7 +73,7 @@ public class QmDateUtil {
     /**
      * 获取昨天结束时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getEndDayOfYesterday() {
         Calendar cal = Calendar.getInstance();
@@ -89,7 +88,7 @@ public class QmDateUtil {
     /**
      * 获取明天开始时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getBeginDayOfTomorrow() {
         Calendar cal = Calendar.getInstance();
@@ -104,7 +103,7 @@ public class QmDateUtil {
     /**
      * 获取明天结束时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getEndDayOfTomorrow() {
         Calendar cal = Calendar.getInstance();
@@ -120,7 +119,7 @@ public class QmDateUtil {
      * 获取某个日期的开始时间
      *
      * @param d
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Timestamp getDayStartTime(Date d) {
         Calendar calendar = Calendar.getInstance();
@@ -139,7 +138,7 @@ public class QmDateUtil {
      * 获取某个日期的结束时间
      *
      * @param d
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Timestamp getDayEndTime(Date d) {
         Calendar calendar = Calendar.getInstance();
@@ -157,7 +156,7 @@ public class QmDateUtil {
     /**
      * 获取本周的开始时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     @SuppressWarnings("unused")
     public static Date getBeginDayOfWeek() {
@@ -176,7 +175,7 @@ public class QmDateUtil {
     /**
      * 获取本周的结束时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getEndDayOfWeek() {
         Calendar cal = Calendar.getInstance();
@@ -206,7 +205,7 @@ public class QmDateUtil {
     /**
      * 获取上周的结束时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getEndDayOfLastWeek() {
         Calendar cal = Calendar.getInstance();
@@ -220,7 +219,7 @@ public class QmDateUtil {
     /**
      * 获取今年是哪一年
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Integer getNowYear() {
         Date date = new Date();
@@ -233,7 +232,7 @@ public class QmDateUtil {
     /**
      * 获取本月是哪一月
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static int getNowMonth() {
         Date date = new Date();
@@ -246,7 +245,7 @@ public class QmDateUtil {
     /**
      * 获取本月的开始时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getBeginDayOfMonth() {
         Calendar calendar = Calendar.getInstance();
@@ -258,7 +257,7 @@ public class QmDateUtil {
     /**
      * 获取本月的结束时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getEndDayOfMonth() {
         Calendar calendar = Calendar.getInstance();
@@ -272,7 +271,7 @@ public class QmDateUtil {
     /**
      * 获取上月的开始时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getBeginDayOfLastMonth() {
         Calendar calendar = Calendar.getInstance();
@@ -284,7 +283,7 @@ public class QmDateUtil {
     /**
      * 获取上月的结束时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getEndDayOfLastMonth() {
         Calendar calendar = Calendar.getInstance();
@@ -298,7 +297,7 @@ public class QmDateUtil {
     /**
      * 获取本年的开始时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getBeginDayOfYear() {
         Calendar cal = Calendar.getInstance();
@@ -312,7 +311,7 @@ public class QmDateUtil {
     /**
      * 获取本年的结束时间
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getEndDayOfYear() {
         Calendar cal = Calendar.getInstance();
@@ -328,7 +327,7 @@ public class QmDateUtil {
      *
      * @param beginDate
      * @param endDate
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static int getDiffDays(Date beginDate, Date endDate) {
         if (beginDate == null || endDate == null) {
@@ -344,7 +343,7 @@ public class QmDateUtil {
      *
      * @param beginDate
      * @param endDate
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static long dateDiff(Date beginDate, Date endDate) {
         long date1ms = beginDate.getTime();
@@ -358,7 +357,7 @@ public class QmDateUtil {
      *
      * @param beginDate
      * @param endDate
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date max(Date beginDate, Date endDate) {
         if (beginDate == null) {
@@ -380,7 +379,7 @@ public class QmDateUtil {
      *
      * @param beginDate
      * @param endDate
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date min(Date beginDate, Date endDate) {
         if (beginDate == null) {
@@ -400,7 +399,7 @@ public class QmDateUtil {
      * 获取某月该季度的第一个月
      *
      * @param date
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getFirstSeasonDate(Date date) {
         final int[] season = {1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4};
@@ -417,7 +416,7 @@ public class QmDateUtil {
      *
      * @param date
      * @param i
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getNextDay(Date date, int i) {
         Calendar cal = new GregorianCalendar();
@@ -432,7 +431,7 @@ public class QmDateUtil {
      *
      * @param date
      * @param i
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date getFrontDay(Date date, int i) {
         Calendar cal = new GregorianCalendar();
@@ -448,7 +447,7 @@ public class QmDateUtil {
      * @param beginYear
      * @param beginMonth
      * @param k
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static List getTimeList(int beginYear, int beginMonth, int k) {
         List list = new ArrayList();
@@ -472,7 +471,7 @@ public class QmDateUtil {
      * @param endYear
      * @param endMonth
      * @param k
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static List getTimeList(int beginYear, int beginMonth, int endYear, int endMonth, int k) {
         List list = new ArrayList();
@@ -506,7 +505,7 @@ public class QmDateUtil {
      * date类型进行格式化输出（返回类型：String）
      *
      * @param date
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String dateFormat(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -519,7 +518,7 @@ public class QmDateUtil {
      * 将"2015-08-31 21:08:06"型字符串转化为Date
      *
      * @param str
-     * @return
+     * @return Returns the specified data according to the method
      * @throws ParseException
      */
     public static Date stringToDate(String str, String pattern) throws ParseException {
@@ -533,7 +532,7 @@ public class QmDateUtil {
      * 将CST时间类型字符串进行格式化输出
      *
      * @param str
-     * @return
+     * @return Returns the specified data according to the method
      * @throws ParseException
      */
     public static String cstFormat(String str) throws ParseException {
@@ -547,7 +546,7 @@ public class QmDateUtil {
      * 将long类型转化为Date
      *
      * @param str
-     * @return
+     * @return Returns the specified data according to the method
      * @throws ParseException
      */
     public static Date longToDare(long str) throws ParseException {
@@ -562,8 +561,7 @@ public class QmDateUtil {
      *
      * @param startDate 开始日期
      * @param endDate   结束日期
-     * @return
-     * @Author jqlin
+     * @return Returns the specified data according to the method
      */
     public static boolean isEffectiveDate(Date startDate, Date endDate) {
         if (startDate == null || endDate == null) {
@@ -581,9 +579,9 @@ public class QmDateUtil {
     /**
      * 得到二个日期间的间隔天数
      *
-     * @param secondString：后一个日期
-     * @param firstString：前一个日期
-     * @return
+     * @param secondString 后一个日期
+     * @param firstString  前一个日期
+     * @return Returns the specified data according to the method
      */
     public static String getTwoDay(String secondString, String firstString) {
         SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -602,9 +600,9 @@ public class QmDateUtil {
     /**
      * 时间前推或后推分钟,其中JJ表示分钟.
      *
-     * @param stringTime：时间
-     * @param minute：分钟（有正负之分）
-     * @return
+     * @param stringTime 时间
+     * @param minute     分钟（有正负之分）
+     * @return Returns the specified data according to the method
      */
     public static String getPreTime(String stringTime, String minute) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -626,7 +624,7 @@ public class QmDateUtil {
      * 将短时间格式字符串转换为时间 yyyy-MM-dd
      *
      * @param strDate
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Date strToDate(String strDate) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -639,9 +637,9 @@ public class QmDateUtil {
     /**
      * 得到一个时间延后或前移几天的时间
      *
-     * @param nowdate：时间
-     * @param delay：前移或后延的天数
-     * @return
+     * @param nowdate 时间
+     * @param delay   前移或后延的天数
+     * @return Returns the specified data according to the method
      */
     public static String getNextDay(String nowdate, String delay) {
         try {
@@ -662,7 +660,7 @@ public class QmDateUtil {
      * 判断是否闰年
      *
      * @param ddate
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static boolean isLeapYear(String ddate) {
         /**
@@ -692,7 +690,7 @@ public class QmDateUtil {
      * 返回美国时间格式
      *
      * @param str
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String getEDate(String str) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -709,7 +707,7 @@ public class QmDateUtil {
      *
      * @param date1
      * @param date2
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static boolean isSameWeekDates(Date date1, Date date2) {
         Calendar cal1 = Calendar.getInstance();
@@ -739,7 +737,7 @@ public class QmDateUtil {
     /**
      * 产生周序列,即得到当前时间所在的年度是第几周
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String getSeqWeek() {
         Calendar c = Calendar.getInstance(Locale.CHINA);
@@ -755,9 +753,9 @@ public class QmDateUtil {
     /**
      * 获得一个日期所在的周的星期几的日期，如要找出2002年2月3日所在周的星期一是几号
      *
-     * @param sdate：日期
-     * @param num：星期几（星期天是一周的第一天）
-     * @return
+     * @param sdate 日期
+     * @param num   星期几（星期天是一周的第一天）
+     * @return Returns the specified data according to the method
      */
     public static String getWeek(String sdate, String num) {
         // 再转换为时间
@@ -794,7 +792,7 @@ public class QmDateUtil {
      * 根据一个日期，返回是星期几的字符串
      *
      * @param sdate
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String getWeek(String sdate) {
         // 再转换为时间
@@ -811,7 +809,7 @@ public class QmDateUtil {
      * 根据一个日期，返回是星期几的字符串
      *
      * @param sdate
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String getWeekStr(String sdate) {
         String str = "";
@@ -840,7 +838,7 @@ public class QmDateUtil {
      *
      * @param date1
      * @param date2
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static long getDays(String date1, String date2) {
         if ("".equals(date1)) {
@@ -870,7 +868,7 @@ public class QmDateUtil {
      * 此函数返回该日历第一行星期日所在的日期
      *
      * @param sdate
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String getNowMonth(String sdate) {
         // 取该时间所在月的一号
@@ -890,7 +888,7 @@ public class QmDateUtil {
      * 根据用户传入的时间表示格式，返回当前时间的格式 如果是yyyyMMdd，注意字母y不能大写
      *
      * @param sformat
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String getUserDate(String sformat) {
         Date currentTime = new Date();
@@ -904,7 +902,7 @@ public class QmDateUtil {
      * 返回一个i位数的随机数
      *
      * @param i
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String getRandom(int i) {
         Random jjj = new Random();
@@ -924,8 +922,8 @@ public class QmDateUtil {
     /**
      * 取得数据库主键 生成格式为yyyymmddhhmmss+k位随机数
      *
-     * @param k：表示是取几位随机数，可以自己定
-     * @return
+     * @param k 表示是取几位随机数，可以自己定
+     * @return Returns the specified data according to the method
      */
     public static String getNo(int k) {
         return getUserDate("yyyyMMddhhmmss") + getRandom(k);

@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
+ * @author starmcc
+ * @version 2019/8/29 17:21
  * 请求配置
- *
- * @Author starmcc
- * @Date 2019/8/29 17:21
  */
 @ConfigurationProperties(prefix = "qmframework.transmit", ignoreUnknownFields = false)
 public class TransmitConfiguration {

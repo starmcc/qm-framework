@@ -8,10 +8,9 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午2:33:49
  * Redis客户端
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午2:33:49
  */
 public final class QmRedisClient {
 
@@ -33,7 +32,7 @@ public final class QmRedisClient {
      *
      * @param key  键
      * @param time 时间(秒)
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static boolean expire(String key, long time) {
         try {
@@ -155,7 +154,7 @@ public final class QmRedisClient {
      *
      * @param key   键
      * @param delta 要增加几(大于0)
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static long incr(String key, long delta) {
         if (delta < 0) {
@@ -169,7 +168,7 @@ public final class QmRedisClient {
      *
      * @param key   键
      * @param delta 要减少几(小于0)
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static long decr(String key, long delta) {
         if (delta < 0) {
@@ -306,7 +305,7 @@ public final class QmRedisClient {
      * @param key  键
      * @param item 项
      * @param by   要增加几(大于0)
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static double hincr(String key, String item, double by) {
         return qmRedisClient.redisTemplate.opsForHash().increment(key, item, by);
@@ -318,7 +317,7 @@ public final class QmRedisClient {
      * @param key  键
      * @param item 项
      * @param by   要减少记(小于0)
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static double hdecr(String key, String item, double by) {
         return qmRedisClient.redisTemplate.opsForHash().increment(key, item, -by);
@@ -328,7 +327,7 @@ public final class QmRedisClient {
      * 根据key获取Set中的所有值
      *
      * @param key 键
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Set<Object> sGet(String key) {
         try {
@@ -398,7 +397,7 @@ public final class QmRedisClient {
      * 获取set缓存的长度
      *
      * @param key 键
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static long sGetSetSize(String key) {
         try {
@@ -432,7 +431,7 @@ public final class QmRedisClient {
      * @param key   键
      * @param start 开始
      * @param end   结束 0 到 -1代表所有值
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static List<Object> lGet(String key, long start, long end) {
         try {
@@ -447,7 +446,7 @@ public final class QmRedisClient {
      * 获取list缓存的长度
      *
      * @param key 键
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static long lGetListSize(String key) {
         try {
@@ -463,7 +462,7 @@ public final class QmRedisClient {
      *
      * @param key   键
      * @param index 索引 index>=0时， 0 表头，1 第二个元素，依次类推；index<0时，-1，表尾，-2倒数第二个元素，依次类推
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Object lGetIndex(String key, long index) {
         try {
@@ -481,8 +480,7 @@ public final class QmRedisClient {
      *
      * @param key   键
      * @param value 值
-     * @param time  时间(秒)
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static boolean lSet(String key, Object value) {
         try {
@@ -500,7 +498,7 @@ public final class QmRedisClient {
      * @param key   键
      * @param value 值
      * @param time  时间(秒)
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static boolean lSet(String key, Object value, long time) {
         try {
@@ -520,8 +518,7 @@ public final class QmRedisClient {
      *
      * @param key   键
      * @param value 值
-     * @param time  时间(秒)
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static boolean lSet(String key, List<Object> value) {
         try {
@@ -539,7 +536,7 @@ public final class QmRedisClient {
      * @param key   键
      * @param value 值
      * @param time  时间(秒)
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static boolean lSet(String key, List<Object> value, long time) {
         try {
@@ -560,7 +557,7 @@ public final class QmRedisClient {
      * @param key   键
      * @param index 索引
      * @param value 值
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static boolean lUpdateIndex(String key, long index, Object value) {
         try {

@@ -11,10 +11,9 @@ import java.util.Properties;
 import java.util.regex.Pattern;
 
 /**
+ * @author starmcc
+ * @version 2019年5月5日11:38:33
  * 字符串正则验证工具
- *
- * @Author starmcc
- * @Date 2019年5月5日11:38:33
  */
 public class QmRegexUtil {
 
@@ -37,7 +36,7 @@ public class QmRegexUtil {
             inStream = new InputStreamReader
                     (QmRegexUtil.class.getClassLoader().getResourceAsStream("config.properties"),
                             "UTF-8");
-            if (inStream == null){
+            if (inStream == null) {
                 QmRegexUtil.newOld = false;
                 inStream = new InputStreamReader
                         (QmRegexUtil.class.getClassLoader().getResourceAsStream("verify.properties"),
@@ -76,9 +75,9 @@ public class QmRegexUtil {
         }
         try {
             String regex;
-            if (QmRegexUtil.newOld){
-                regex = PRO.getProperty( "regex." + node);
-            }else {
+            if (QmRegexUtil.newOld) {
+                regex = PRO.getProperty("regex." + node);
+            } else {
                 regex = PRO.getProperty(node);
             }
             if (regex == null) {
@@ -97,7 +96,7 @@ public class QmRegexUtil {
      * 获取对应节点的错误信息
      *
      * @param node
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String getErrorMsg(String node) {
         try {

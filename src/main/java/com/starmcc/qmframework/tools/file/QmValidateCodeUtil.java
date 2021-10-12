@@ -9,10 +9,9 @@ import java.io.OutputStream;
 import java.util.Random;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午2:12:12
  * 验证码生成器
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午2:12:12
  */
 public class QmValidateCodeUtil {
     /**

@@ -6,8 +6,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
- * @Author starmcc
- * @Date 2020/9/22 9:27
+ * @author starmcc
+ * @version 2020/9/22 9:27
  */
 public class QmCommonEvent extends ApplicationEvent {
     /**

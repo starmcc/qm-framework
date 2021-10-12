@@ -11,10 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午1:34:28
  * 接口日志，返回请求时间，参数，返回值等信息。
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午1:34:28
  */
 @Aspect
 public class QmControllerAgentAgency {
@@ -45,7 +44,7 @@ public class QmControllerAgentAgency {
      * 环绕增强(最强版)
      *
      * @param pjp
-     * @return
+     * @return Returns the specified data according to the method
      * @throws Throwable
      */
     @Around("qmPointcut()")

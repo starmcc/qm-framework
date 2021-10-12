@@ -28,11 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午1:33:11
  * QmFramework 核心组合配置类
- * 请在标注了@SpringBootApplication启动类中继承他。
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午1:33:11
+ * 请在标注了@SpringBootApplication启动类中继承它。
  */
 @Import({TransmitConfiguration.class,
         VersionConfiguration.class,
@@ -66,7 +65,7 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
     /**
      * 初始化QmSpringManager
      *
-     * @return
+     * @return Returns the specified data according to the method
      */
     @Bean
     public QmSpringManager initQmSpringManager() {
@@ -117,12 +116,12 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
     }
 
     @Bean
-    public QmCommonListener initEventListener(){
+    public QmCommonListener initEventListener() {
         return new QmCommonListener();
     }
 
     @Bean
-    public QmEventManager initListener(){
+    public QmEventManager initListener() {
         return new QmEventManager();
     }
 

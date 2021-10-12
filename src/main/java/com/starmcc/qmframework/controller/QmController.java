@@ -1,11 +1,11 @@
 package com.starmcc.qmframework.controller;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午1:42:26
  * 父类Controller, 编写Controller请继承该类。
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午1:42:26
  */
+@Deprecated
 public class QmController {
 
     @Deprecated

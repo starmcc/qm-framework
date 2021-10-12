@@ -8,10 +8,9 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.AntPathMatcher;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午2:11:03
  * Spring工具管理器
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午2:11:03
  */
 public class QmSpringManager implements ApplicationContextAware {
 
@@ -39,7 +38,7 @@ public class QmSpringManager implements ApplicationContextAware {
      * 通过name获取 Bean.
      *
      * @param name name
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static Object getBean(String name) {
         return getApplicationContext().getBean(name);
@@ -49,7 +48,7 @@ public class QmSpringManager implements ApplicationContextAware {
      * 通过class获取Bean.
      *
      * @param clazz class
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static <T> T getBean(Class<T> clazz) {
         return getApplicationContext().getBean(clazz);
@@ -60,7 +59,7 @@ public class QmSpringManager implements ApplicationContextAware {
      *
      * @param name  name
      * @param clazz class
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static <T> T getBean(String name, Class<T> clazz) {
         return getApplicationContext().getBean(name, clazz);
@@ -71,7 +70,7 @@ public class QmSpringManager implements ApplicationContextAware {
      *
      * @param matchingUrl 匹配路径
      * @param requestUrl  请求地址
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static boolean verifyMatchURI(String matchingUrl, String requestUrl) {
         return new AntPathMatcher().match(matchingUrl, requestUrl);

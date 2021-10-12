@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
+ * @author starmcc
+ * @version 2019/8/29 17:49
  * 版本配置
- *
- * @Author starmcc
- * @Date 2019/8/29 17:49
  */
 @ConfigurationProperties(prefix = "qmframework.version", ignoreUnknownFields = false)
 public class VersionConfiguration {

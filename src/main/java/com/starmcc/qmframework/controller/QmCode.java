@@ -4,10 +4,9 @@ package com.starmcc.qmframework.controller;
 import com.starmcc.qmframework.config.TransmitConfiguration;
 
 /**
+ * @author starmcc
+ * @version 2018年10月26日 上午12:58:22
  * 数据请求状态码工具类
- *
- * @Author starmcc
- * @createDate 2018年10月26日 上午12:58:22
  */
 public enum QmCode {
     /**
@@ -41,7 +40,7 @@ public enum QmCode {
     /**
      * 您的账号已在其他地方登录!
      */
-    _105(105,"您的账号已在其他地方登录!","Your account has been logged in elsewhere"),
+    _105(105, "您的账号已在其他地方登录!", "Your account has been logged in elsewhere"),
     /**
      * 请求404,找不到资源
      */
@@ -66,15 +65,15 @@ public enum QmCode {
     /**
      * 编码
      */
-    private int code;
+    private final int code;
     /**
      * 中文msg
      */
-    private String cnMsg;
+    private final String cnMsg;
     /**
      * 英文msg
      */
-    private String enMsg;
+    private final String enMsg;
 
     private QmCode(int code, String cnMsg, String enMsg) {
         this.code = code;
@@ -86,6 +85,14 @@ public enum QmCode {
         return code;
     }
 
+    public String getCnMsg() {
+        return cnMsg;
+    }
+
+    public String getEnMsg() {
+        return enMsg;
+    }
+
     /**
      * 根据code获取对应msg信息
      *
@@ -93,6 +100,6 @@ public enum QmCode {
      * @return msg
      */
     public static final String getMsg(QmCode code) {
-        return "cn".equalsIgnoreCase(TransmitConfiguration.responseMessageLang) ? code.cnMsg : code.enMsg;
+        return "cn".equalsIgnoreCase(TransmitConfiguration.responseMessageLang) ? code.getCnMsg() : code.getEnMsg();
     }
 }

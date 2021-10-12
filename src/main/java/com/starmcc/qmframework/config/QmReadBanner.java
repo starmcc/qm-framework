@@ -8,10 +8,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
+ * @author starmcc
+ * @version 2019/6/3 15:56
  * 读取Banner
- *
- * @Author starmcc
- * @Date 2019/6/3 15:56
  */
 public class QmReadBanner {
 
@@ -21,7 +20,7 @@ public class QmReadBanner {
      * 读取Banner
      *
      * @param fileName
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String getBanner(String fileName) {
         try {

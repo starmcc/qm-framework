@@ -3,7 +3,6 @@ package com.starmcc.qmframework.body;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.starmcc.qmframework.config.TransmitConfiguration;
-import com.starmcc.qmframework.controller.QmController;
 import com.starmcc.qmframework.exception.QmParamErrorException;
 import com.starmcc.qmframework.exception.QmParamNullException;
 import org.apache.commons.io.IOUtils;
@@ -25,12 +24,11 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * V1.0 Description: 自定义解析json数据
- *
- * @Author starmcc
- * @Date 2018年9月10日
+ * @author starmcc
+ * @version 2018年9月10日 V1.0
+ * 自定义解析json数据
  */
-public class JsonPathArgumentResolver extends QmController implements HandlerMethodArgumentResolver {
+public class JsonPathArgumentResolver implements HandlerMethodArgumentResolver {
 
     private static final String JSONBODY_ATTRIBUTE = "JSON_REQUEST_BODY";
 
@@ -172,7 +170,7 @@ public class JsonPathArgumentResolver extends QmController implements HandlerMet
      * 基本类型包装类型解析
      *
      * @param parameterType Class
-     * @param value Object
+     * @param value         Object
      * @return Object
      */
     private Object parseBasicTypeWrapper(Class<?> parameterType, Object value) {
@@ -201,6 +199,7 @@ public class JsonPathArgumentResolver extends QmController implements HandlerMet
 
     /**
      * 是否为包装数据类型
+     *
      * @param clazz class
      * @return boolean
      */
@@ -220,6 +219,7 @@ public class JsonPathArgumentResolver extends QmController implements HandlerMet
 
     /**
      * 获取请求体JSON字符串
+     *
      * @param webRequest NativeWebRequest
      * @return String
      */

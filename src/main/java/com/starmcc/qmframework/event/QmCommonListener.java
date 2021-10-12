@@ -3,8 +3,8 @@ package com.starmcc.qmframework.event;
 import org.springframework.context.ApplicationListener;
 
 /**
- * @Author starmcc
- * @Date 2020/9/22 9:29
+ * @author starmcc
+ * @version 2020/9/22 9:29
  */
 public class QmCommonListener implements ApplicationListener<QmCommonEvent> {
 

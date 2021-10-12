@@ -14,10 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * @author starmcc
+ * @version 2019/7/17 17:33
  * Map and Bean Tools
- *
- * @Author starmcc
- * @Date 2019/7/17 17:33
  */
 public class QmConvertUtil {
     /**
@@ -66,7 +65,7 @@ public class QmConvertUtil {
      * @param maps 包含属性值的 mapList
      * @param type 要转化的类型
      * @param <T>  转化出来的 JavaBean 对象 List
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static <T> List<T> mapsToBeans(List<Map> maps, Class<T> type) {
         List<T> list = new ArrayList<>();
@@ -111,7 +110,7 @@ public class QmConvertUtil {
             throw new QmFrameException("IllegalAccessException 实例化 JavaBean 失败!", e);
         } catch (InvocationTargetException e) {
             throw new QmFrameException("InvocationTargetException 调用属性的 setter 方法失败!", e);
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new QmFrameException("其他异常", e);
         }
     }
@@ -120,7 +119,7 @@ public class QmConvertUtil {
      * 将一个 List 包含 JavaBean 的集合转化为一个 List 包含 map 的集合
      *
      * @param beans 要转化的 list<JavaBean>
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static <T> List<Map> beansToMaps(List<T> beans) {
         List<Map> list = new ArrayList<>();

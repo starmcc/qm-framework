@@ -4,10 +4,9 @@ import java.util.Random;
 import java.util.UUID;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午2:06:55
  * 随机生成工具类
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午2:06:55
  */
 public class QmRandomUtil {
 

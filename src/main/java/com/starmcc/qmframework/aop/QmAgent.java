@@ -6,9 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @Author starmcc
- * @Date 2020/9/22 15:47
- * @Description AOP 切入点
+ * @author starmcc
+ * @version 2020/9/22 15:47
+ * AOP 切入点
  */
 @Target(ElementType.METHOD)//使用在方法上
 @Retention(RetentionPolicy.RUNTIME)

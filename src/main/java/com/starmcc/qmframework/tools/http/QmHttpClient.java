@@ -17,10 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午2:01:35
  * QmHttpClient工具类
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午2:01:35
  */
 public class QmHttpClient {
 
@@ -41,7 +40,7 @@ public class QmHttpClient {
      * @param headers  请求头
      * @param params   请求参数
      * @param encoding 编码方式
-     * @return
+     * @return Returns the specified data according to the method
      */
     private static String sendPost(String url,
                                    Map<String, String> headers,
@@ -305,7 +304,7 @@ public class QmHttpClient {
      * 用户真实IP为： 192.168.1.110
      *
      * @param request
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String getHttpIp(HttpServletRequest request) {
         String ip = request.getHeader("x-forwarded-for");

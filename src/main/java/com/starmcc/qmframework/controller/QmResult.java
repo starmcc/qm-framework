@@ -14,8 +14,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @Author starmcc
- * @Date 2020/9/22 15:36
+ * @author starmcc
+ * @version 2020/9/22 15:36
+ * 状态返回静态工具
  */
 public class QmResult {
 
@@ -132,7 +133,7 @@ public class QmResult {
      * 接口回调方法
      *
      * @param code QmCode
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String sendJson(QmCode code) {
         return QmResult.sendJson(code, QmCode.getMsg(code), null);
@@ -143,7 +144,7 @@ public class QmResult {
      *
      * @param code QmCode
      * @param data 传递数据
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String sendJson(QmCode code, Object data) {
         return QmResult.sendJson(code, QmCode.getMsg(code), data);
@@ -155,7 +156,7 @@ public class QmResult {
      * @param code QmCode
      * @param msg  自定义消息
      * @param data 传递数据
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String sendJson(QmCode code, String msg, Object data) {
         return QmResult.sendJson(code.getCode(), msg, data);
@@ -166,7 +167,7 @@ public class QmResult {
      *
      * @param code code
      * @param msg  自定义消息
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String sendJson(int code, String msg) {
         return QmResult.sendJson(code, msg, null);
@@ -177,7 +178,7 @@ public class QmResult {
      *
      * @param code code
      * @param data 传递数据
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String sendJson(int code, Object data) {
         return QmResult.sendJson(code, "", data);
@@ -189,7 +190,7 @@ public class QmResult {
      * @param code code
      * @param msg  自定义消息
      * @param data 传递数据
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String sendJson(int code, String msg, Object data) {
         Map<String, Object> responseMap = new LinkedHashMap<>(16);
@@ -203,8 +204,8 @@ public class QmResult {
     /**
      * 构建响应数据
      *
-     * @param json
-     * @return
+     * @param responseMap
+     * @return Returns the specified data according to the method
      */
     protected static String parseJsonToResponse(Map<String, Object> responseMap) {
         // 解析成json字符串

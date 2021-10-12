@@ -3,8 +3,9 @@ package com.starmcc.qmframework.filter;
 import com.starmcc.qmframework.config.SpecialConfiguration;
 import com.starmcc.qmframework.config.VersionConfiguration;
 import com.starmcc.qmframework.controller.QmCode;
-import com.starmcc.qmframework.controller.QmController;
+import com.starmcc.qmframework.controller.QmResult;
 import com.starmcc.qmframework.tools.spring.QmSpringManager;
+import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,12 +17,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午1:15:27
  * 该过滤器主要实现版本控制、重写RequestBody、实现AES对称无痕解密
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午1:15:27
  */
-public class InitFilter extends QmController implements Filter {
+public class InitFilter implements Filter {
     /**
      * Logger slf4j
      */
@@ -46,7 +46,7 @@ public class InitFilter extends QmController implements Filter {
         }
         //版本控制
         if (!verifyVersion(request)) {
-            response.getWriter().write(super.sendJSON(QmCode._102));
+            response.getWriter().write(QmResult.sendJson(QmCode._102));
             return;
         }
         /**
@@ -76,7 +76,7 @@ public class InitFilter extends QmController implements Filter {
      * 验证是否为特殊请求
      *
      * @param request
-     * @return
+     * @return Returns the specified data according to the method
      */
     private boolean verifySpecialURI(HttpServletRequest request) {
         for (String uri : SpecialConfiguration.uri) {
@@ -91,7 +91,7 @@ public class InitFilter extends QmController implements Filter {
      * 版本验证工具
      *
      * @param request
-     * @return
+     * @return Returns the specified data according to the method
      * @throws IOException
      */
     private boolean verifyVersion(HttpServletRequest request) throws IOException {
@@ -109,7 +109,8 @@ public class InitFilter extends QmController implements Filter {
             return true;
         }
         LOG.debug("※※※进入版本控制判断※※※");
-        if (VersionConfiguration.allows != null && VersionConfiguration.allows.length > 0) {
+
+        if (ArrayUtils.isNotEmpty(VersionConfiguration.allows)) {
             for (String version : VersionConfiguration.allows) {
                 if (version.equals(versionRequest)) {
                     //通过

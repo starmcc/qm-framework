@@ -16,16 +16,18 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.Enumeration;
+import java.util.Objects;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午1:23:44
  * qmframework 重写 RequestBody, 并实现AES无缝对称加密
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午1:23:44
  */
 public class QmRequestWrapper extends HttpServletRequestWrapper {
 
     private static final Logger LOG = LoggerFactory.getLogger(QmRequestWrapper.class);
+
+    private static final String CHARSET_NAME = "UTF-8";
     /**
      * body
      */
@@ -39,6 +41,16 @@ public class QmRequestWrapper extends HttpServletRequestWrapper {
      */
     public QmRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
+        this.printLog(request);
+        this.body = this.getBodyByAes(this.getBodyString(request)).getBytes(Charset.forName(CHARSET_NAME));
+    }
+
+    /**
+     * 打印日志
+     *
+     * @param request
+     */
+    private void printLog(HttpServletRequest request) {
         Enumeration<String> e = request.getHeaderNames();
         // 日志打印
         StringBuffer sbf = new StringBuffer();
@@ -52,8 +64,6 @@ public class QmRequestWrapper extends HttpServletRequestWrapper {
         }
         LOG.debug(sbf.toString());
         // 日志打印结束
-        String bodyTemp = this.getBodyString(request);
-        body = this.getBodyByAes(bodyTemp).getBytes(Charset.forName("UTF-8"));
     }
 
     /**
@@ -77,7 +87,7 @@ public class QmRequestWrapper extends HttpServletRequestWrapper {
             try {
                 body = QmAesUtil.decryptAes(body);
             } catch (Exception e) {
-                e.printStackTrace();
+                LOG.error("解密异常: {}", e);
                 return null;
             }
         }
@@ -102,20 +112,20 @@ public class QmRequestWrapper extends HttpServletRequestWrapper {
                 sb.append(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("IOException异常: {}", e);
         } finally {
-            if (null != inputStream) {
+            if (Objects.nonNull(inputStream)) {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOG.error("IOException异常: {}", e);
                 }
             }
-            if (null != reader) {
+            if (Objects.nonNull(reader)) {
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOG.error("IOException异常: {}", e);
                 }
             }
         }

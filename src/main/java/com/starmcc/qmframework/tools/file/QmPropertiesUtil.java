@@ -8,10 +8,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 /**
+ * @author starmcc
+ * @version 2018年11月24日 上午2:09:11
  * properties工具类，默认读取config.properties配置文件
- *
- * @Author starmcc
- * @Date 2018年11月24日 上午2:09:11
  */
 public class QmPropertiesUtil {
 
@@ -81,7 +80,7 @@ public class QmPropertiesUtil {
      *
      * @param key      key
      * @param fileName 文件名
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String getValueByFileName(String key, String fileName) {
         Properties pro = new Properties();

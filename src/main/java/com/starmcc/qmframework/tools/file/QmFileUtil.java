@@ -3,9 +3,8 @@ package com.starmcc.qmframework.tools.file;
 import java.io.*;
 
 /**
+ * @author starmcc
  * 文件读取工具
- *
- * @Author starmcc
  */
 public class QmFileUtil {
 
@@ -13,7 +12,7 @@ public class QmFileUtil {
      * 以字节为单位读取文件，通常用于读取二进制文件，如图片
      *
      * @param path
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String readByBytes(String path) {
         String content = null;
@@ -50,7 +49,7 @@ public class QmFileUtil {
      * 以行为单位读取文件，常用于读取面向行的格式化文件
      *
      * @param path
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String readByLines(String path) {
         String content = null;
@@ -80,7 +79,7 @@ public class QmFileUtil {
      * 以字符为单位读取文件，常用于读取文本文件
      *
      * @param path
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static String readByChars(String path) {
         String content = null;
@@ -109,7 +108,7 @@ public class QmFileUtil {
      *
      * @param content
      * @param path
-     * @return
+     * @return Returns the specified data according to the method
      */
     public static boolean saveAs(String content, String path) {
         FileWriter fw = null;

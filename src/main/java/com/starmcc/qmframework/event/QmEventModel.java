@@ -3,8 +3,8 @@ package com.starmcc.qmframework.event;
 import java.util.Objects;
 
 /**
- * @Author starmcc
- * @Date 2020/9/22 9:54
+ * @author starmcc
+ * @version 2020/9/22 9:54
  */
 public class QmEventModel {
 

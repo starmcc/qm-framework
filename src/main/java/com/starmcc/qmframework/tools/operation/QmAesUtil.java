@@ -13,9 +13,8 @@ import java.security.SecureRandom;
 import java.util.Date;
 
 /**
+ * @author starmcc
  * AES对称加密技术
- *
- * @Author starmcc
  */
 public class QmAesUtil {
 
@@ -25,7 +24,7 @@ public class QmAesUtil {
      * 加密封装(使用配置的key和次数)
      *
      * @param data 加密数据
-     * @return
+     * @return Returns the specified data according to the method
      * @throws Exception
      */
     public static String encryptAes(String data) throws Exception {
@@ -43,7 +42,7 @@ public class QmAesUtil {
      * 解密封装(使用配置的key和次数)
      *
      * @param data 密文
-     * @return
+     * @return Returns the specified data according to the method
      * @throws Exception
      */
     public static String decryptAes(String data) throws Exception {
@@ -62,7 +61,7 @@ public class QmAesUtil {
      * @param data 加密数据
      * @param num  加密次数
      * @param key  秘钥
-     * @return
+     * @return Returns the specified data according to the method
      * @throws Exception
      */
     public static String encryptAes(String data, int num, String key) throws Exception {
@@ -81,7 +80,7 @@ public class QmAesUtil {
      * @param data 密文
      * @param num  解密次数
      * @param key  秘钥
-     * @return
+     * @return Returns the specified data according to the method
      * @throws Exception
      */
     public static String decryptAes(String data, int num, String key) throws Exception {
@@ -100,7 +99,7 @@ public class QmAesUtil {
      *
      * @param data
      * @param key
-     * @return
+     * @return Returns the specified data according to the method
      * @throws Exception
      */
     private static String encryptAes(String data, String key) throws Exception {
@@ -123,7 +122,7 @@ public class QmAesUtil {
      *
      * @param data
      * @param key
-     * @return
+     * @return Returns the specified data according to the method
      * @throws Exception
      */
     private static String decryptAes(String data, String key) throws Exception {

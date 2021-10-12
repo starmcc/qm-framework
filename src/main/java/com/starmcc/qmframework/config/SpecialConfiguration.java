@@ -6,10 +6,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.List;
 
 /**
+ * @author starmcc
+ * @version 2019/8/30 14:49
  * 特殊请求配置
- *
- * @Author starmcc
- * @Date 2019/8/30 14:49
  */
 @ConfigurationProperties(prefix = "qmframework.special", ignoreUnknownFields = false)
 public class SpecialConfiguration {

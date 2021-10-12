@@ -6,10 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * @author starmcc
+ * @version 2018年11月30日14:46:28
  * qmframework请求json数据解析注解
- *
- * @Author starmcc
- * @Date 2018年11月30日14:46:28
  */
 @Target(ElementType.PARAMETER)//使用在参数上
 @Retention(RetentionPolicy.RUNTIME)//运行时注解

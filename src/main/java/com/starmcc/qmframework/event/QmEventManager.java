@@ -4,8 +4,8 @@ import com.starmcc.qmframework.tools.spring.QmSpringManager;
 import org.springframework.scheduling.annotation.Async;
 
 /**
- * @Author starmcc
- * @Date 2020/9/22 9:57
+ * @author starmcc
+ * @version 2020/9/22 9:57
  */
 public class QmEventManager {
 
