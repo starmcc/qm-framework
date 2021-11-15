@@ -4,21 +4,15 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.starmcc.qmframework.body.JsonPathArgumentResolver;
-import com.starmcc.qmframework.event.QmCommonListener;
-import com.starmcc.qmframework.event.QmEventManager;
 import com.starmcc.qmframework.filter.InitFilter;
 import com.starmcc.qmframework.tools.spring.QmSpringManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -78,8 +72,8 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
      * @return FilterRegistrationBean
      */
     @Bean
-    public FilterRegistrationBean initFilter() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
+    public FilterRegistrationBean<InitFilter> initFilter() {
+        FilterRegistrationBean<InitFilter> registration = new FilterRegistrationBean<>();
         //注入过滤器
         registration.setFilter(new InitFilter());
         //拦截规则
@@ -90,41 +84,6 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
         registration.setOrder(1);
         return registration;
     }
-
-    /**
-     * 跨域过滤器
-     *
-     * @return FilterRegistrationBean
-     */
-    @Bean
-    public FilterRegistrationBean corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        //1.添加CORS配置信息
-        CorsConfiguration config = new CorsConfiguration();
-        //放行哪些原始域
-        config.addAllowedOrigin("*");
-        //是否发送Cookie信息
-        config.setAllowCredentials(true);
-        //放行哪些原始域(请求方式)
-        config.addAllowedMethod("*");
-        //放行哪些原始域(头部信息)
-        config.addAllowedHeader("*");
-        source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-        bean.setOrder(0);
-        return bean;
-    }
-
-    @Bean
-    public QmCommonListener initEventListener() {
-        return new QmCommonListener();
-    }
-
-    @Bean
-    public QmEventManager initListener() {
-        return new QmEventManager();
-    }
-
 
     /**
      * 配置消息转换器--这里我用的是alibaba fastjson

@@ -33,17 +33,17 @@ public class InitFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         if (request.getMethod().equals(RequestMethod.OPTIONS.name())) {
-            chain.doFilter(request, response);
+            chain.doFilter(req, res);
+            return;
+        }
+        LOG.info("※※※请求URI：" + request.getRequestURI() + "※※※");
+        //特殊请求
+        if (verifySpecialURI(request)) {
+            chain.doFilter(req, res);
             return;
         }
         // 设置请求头和相应头
         settingRequsetOrResponse(request, response);
-        LOG.info("※※※请求URI：" + request.getRequestURI() + "※※※");
-        //特殊请求
-        if (verifySpecialURI(request)) {
-            chain.doFilter(request, response);
-            return;
-        }
         //版本控制
         if (!verifyVersion(request)) {
             response.getWriter().write(QmResult.sendJson(QmCode._102));
