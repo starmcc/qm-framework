@@ -59,7 +59,3 @@
 4.6 快速拓展AOP业务场景 (New)
 
 > 在方法上添加`@Agent`实现对方法快速AOP代理
-
-4.7 精简快速的异步事件拓展 (New)
-
-> 定义一个事件或异步事件，只需实现函数式接口`QmEventInterface`，在需要的地方使用`QmEventManager`。
