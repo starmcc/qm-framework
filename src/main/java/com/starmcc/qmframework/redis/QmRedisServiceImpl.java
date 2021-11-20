@@ -132,6 +132,8 @@ public class QmRedisServiceImpl implements QmRedisService {
                 procedure.run();
             }
         }, true);
+        // 执行完毕后，锁释放
+        this.del(keyModel);
     }
 
 
