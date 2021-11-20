@@ -36,9 +36,9 @@ public class InitFilter implements Filter {
             chain.doFilter(req, res);
             return;
         }
-        LOG.info("※※※请求URI：" + request.getRequestURI() + "※※※");
+        LOG.info("※ Request URI{" + request.getRequestURI() + "} ※");
         //特殊请求
-        if (verifySpecialURI(request)) {
+        if (verifySpecialUri(request)) {
             chain.doFilter(req, res);
             return;
         }
@@ -78,8 +78,8 @@ public class InitFilter implements Filter {
      * @param request
      * @return Returns the specified data according to the method
      */
-    private boolean verifySpecialURI(HttpServletRequest request) {
-        for (String uri : SpecialConfiguration.uri) {
+    private boolean verifySpecialUri(HttpServletRequest request) {
+        for (String uri : SpecialConfiguration.getUri()) {
             if (QmSpringManager.verifyMatchURI(uri, request.getRequestURI())) {
                 return true;
             }
@@ -96,29 +96,29 @@ public class InitFilter implements Filter {
      */
     private boolean verifyVersion(HttpServletRequest request) throws IOException {
         //不开启版本控制
-        if (!VersionConfiguration.start) {
+        if (!VersionConfiguration.isStart()) {
             return true;
         }
         ;
         //目前版本号
         String versionRequest = request.getHeader("version");
-        LOG.info("※※※请求版本号：" + versionRequest + "※※※");
-        LOG.info("※※※当前版本号：" + VersionConfiguration.now + "※※※");
-        if (VersionConfiguration.now.equals(versionRequest)) {
+        LOG.info("※ Request version{" + versionRequest + "} ※");
+        LOG.info("※ Current version{" + VersionConfiguration.getNow() + "} ※");
+        if (VersionConfiguration.getNow().equals(versionRequest)) {
             //通过
             return true;
         }
-        LOG.debug("※※※进入版本控制判断※※※");
+        LOG.debug("※ Enter version control judgment ※");
 
-        if (ArrayUtils.isNotEmpty(VersionConfiguration.allows)) {
-            for (String version : VersionConfiguration.allows) {
+        if (ArrayUtils.isNotEmpty(VersionConfiguration.getAllows())) {
+            for (String version : VersionConfiguration.getAllows()) {
                 if (version.equals(versionRequest)) {
                     //通过
                     return true;
                 }
             }
         }
-        LOG.debug("※※※请求失败,服务器并无配置可允许版本※※※");
+        LOG.debug("※ The request failed. The server is not configured to allow a version ※");
         return false;
     }
 

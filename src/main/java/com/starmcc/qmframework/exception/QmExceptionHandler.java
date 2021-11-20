@@ -29,36 +29,32 @@ public class QmExceptionHandler {
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseBody
-    public String httpRequestMethodNotSupportedException(HttpServletResponse response,
-                                                         Exception e) {
-        LOG.warn("请求方式错误,请核实请求方式 `GET` and `POST`");
+    public String httpRequestMethodNotSupportedException(HttpServletResponse response, Exception e) {
+        LOG.warn("Incorrect request, please verify the request `GET` and `POST` {}", e.getMessage());
         response.setStatus(200);
         return QmResult.sendJson(QmCode._405);
     }
 
     @ExceptionHandler(QmParamNullException.class)
     @ResponseBody
-    public String qmParamNullException(HttpServletResponse response,
-                                       Exception e) {
-        LOG.warn("缺少某些请求参数,请核实请求参数是否正确!");
+    public String qmParamNullException(HttpServletResponse response, Exception e) {
+        LOG.warn("Some request parameters are missing, please verify the request parameters are correct! {}", e.getMessage());
         response.setStatus(200);
         return QmResult.paramNull();
     }
 
     @ExceptionHandler(QmParamErrorException.class)
     @ResponseBody
-    public String qmParamErrorException(HttpServletResponse response,
-                                        Exception e) {
-        LOG.warn("请求参数错误,请核实请求参数是否正确!");
+    public String qmParamErrorException(HttpServletResponse response, Exception e) {
+        LOG.warn("Request parameters error, please verify the request parameters are correct! {}", e.getMessage());
         response.setStatus(200);
         return QmResult.paramFail();
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     @ResponseBody
-    public String httpMediaTypeNotSupportedException(HttpServletResponse response,
-                                                     Exception e) {
-        LOG.warn("HttpMediaTypeNotSupportedException异常 {}", e);
+    public String httpMediaTypeNotSupportedException(HttpServletResponse response, Exception e) {
+        LOG.warn("An unsupported HTTP media type! {}", e.getMessage(), e);
         response.setStatus(200);
         return QmResult.sendJson(QmCode._415);
     }
@@ -67,9 +63,8 @@ public class QmExceptionHandler {
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ResponseBody
-    public String notFoundPage404(HttpServletResponse response,
-                                  Exception e) throws IOException {
-        LOG.warn("请求地址错误,请核实请求地址是否正确!");
+    public String notFoundPage404(HttpServletResponse response, Exception e) throws IOException {
+        LOG.warn("The requested address is incorrect. Please verify that the requested address is correct! {}", e.getMessage());
         response.setStatus(200);
         return QmResult.sendJson(QmCode._404);
     }
@@ -78,8 +73,8 @@ public class QmExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public String defaultException(HttpServletResponse response, Exception e) throws IOException {
-        LOG.error("服务器遇到了错误,请检查相关问题!");
-        e.printStackTrace();
+        LOG.error("Server encountered an error, please check the problem!");
+        LOG.error("defaultException {}", e.getMessage(), e);
         response.setStatus(200);
         return QmResult.error();
     }

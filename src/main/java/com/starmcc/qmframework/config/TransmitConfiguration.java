@@ -8,12 +8,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @version 2019/8/29 17:21
  * 请求配置
  */
-@ConfigurationProperties(prefix = "qmframework.transmit", ignoreUnknownFields = false)
+@ConfigurationProperties("qmframework.transmit")
 public class TransmitConfiguration {
 
-    public static String requestKey;
-    public static String responseKey;
-    public static String responseMessageLang;
+    private static String requestKey;
+    private static String responseKey;
+    private static String responseMessageLang;
 
     @Value("${request.key:}")
     public void setRequestKey(String requestKey) {
@@ -30,15 +30,15 @@ public class TransmitConfiguration {
         TransmitConfiguration.responseMessageLang = responseMessageLang;
     }
 
-    public String getRequestKey() {
+    public static String getRequestKey() {
         return TransmitConfiguration.requestKey;
     }
 
-    public String getResponseKey() {
+    public static String getResponseKey() {
         return TransmitConfiguration.responseKey;
     }
 
-    public String getResponseMessageLang() {
+    public static String getResponseMessageLang() {
         return TransmitConfiguration.responseMessageLang;
     }
 }

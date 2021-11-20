@@ -7,7 +7,7 @@
     <groupId>com.starmcc</groupId>
     <artifactId>qm-framework</artifactId>
     <packaging>jar</packaging>
-    <version>2.1.2-${project.env}</version>
+    <version>3.0.0-${project.env}</version>
     <url>https://www.starmcc.com/qm-framework</url>
 
     <description>
@@ -33,6 +33,7 @@
         <commons-io.version>2.7</commons-io.version>
         <commons-text.version>1.9</commons-text.version>
         <springboot.version>2.5.5</springboot.version>
+        <jedis.version>3.7.0</jedis.version>
     </properties>
 
     <!-- spring boot 父类依赖 -->
@@ -61,13 +62,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- springboot-redis依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
             <optional>true</optional>
         </dependency>
 
@@ -101,6 +95,13 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>${httpclient.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis.version}</version>
             <optional>true</optional>
         </dependency>
     </dependencies>

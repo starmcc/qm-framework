@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.starmcc.qmframework.config.AesConfiguration;
 import com.starmcc.qmframework.config.TransmitConfiguration;
-import com.starmcc.qmframework.exception.QmFrameException;
+import com.starmcc.qmframework.exception.QmFrameworkException;
 import com.starmcc.qmframework.tools.operation.QmAesUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -210,22 +210,22 @@ public class QmResult {
     protected static String parseJsonToResponse(Map<String, Object> responseMap) {
         // 解析成json字符串
         String json = JSONObject.toJSONString(responseMap, SerializerFeature.WriteMapNullValue);
-        if (AesConfiguration.start) {
+        if (AesConfiguration.isStart()) {
             // 如果加密，则对json字符串加密
             try {
                 json = QmAesUtil.encryptAes(json);
             } catch (Exception e) {
-                throw new QmFrameException("加密异常", e);
+                throw new QmFrameworkException("Encryption abnormal", e);
             }
         }
         // 不加密逻辑
-        if (StringUtils.isBlank(TransmitConfiguration.responseKey)) {
+        if (StringUtils.isBlank(TransmitConfiguration.getResponseKey())) {
             // 如果没有key则直接返回
             return json;
         }
         Map<String, Object> valueMap = new HashMap<>(16);
-        valueMap.put(TransmitConfiguration.responseKey,
-                AesConfiguration.start ? json : responseMap);
+        valueMap.put(TransmitConfiguration.getResponseKey(),
+                AesConfiguration.isStart() ? json : responseMap);
         return JSONObject.toJSONString(valueMap, SerializerFeature.WriteMapNullValue);
     }
 

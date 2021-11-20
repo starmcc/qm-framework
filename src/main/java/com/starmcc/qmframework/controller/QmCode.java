@@ -100,6 +100,6 @@ public enum QmCode {
      * @return msg
      */
     public static final String getMsg(QmCode code) {
-        return "cn".equalsIgnoreCase(TransmitConfiguration.responseMessageLang) ? code.getCnMsg() : code.getEnMsg();
+        return "cn".equalsIgnoreCase(TransmitConfiguration.getResponseMessageLang()) ? code.getCnMsg() : code.getEnMsg();
     }
 }

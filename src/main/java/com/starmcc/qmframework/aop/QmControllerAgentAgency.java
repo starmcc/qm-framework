@@ -63,13 +63,13 @@ public class QmControllerAgentAgency {
         if (null != qmControllerAgent) {
             qmControllerAgent.before(jp);
         }
-        if (AgentConfiguration.log) {
+        if (AgentConfiguration.isLog()) {
             // getTarget得到被代理的目标对象(要切入的目标对象)
             // getSignature得到被代理的目标对象的方法名(返回被切入的目标方法名)
-            LOG.debug("执行位置:{}.{}", jp.getTarget().getClass().getName(),
+            LOG.debug("Execute location {}.{}", jp.getTarget().getClass().getName(),
                     jp.getSignature().getName());
             // Arrays.toString(jp.getArgs())获得目标方法的参数列表
-            LOG.debug("参数列表:" + Arrays.toString(jp.getArgs()));
+            LOG.debug("Param list {}", Arrays.toString(jp.getArgs()));
         }
     }
 
@@ -85,10 +85,10 @@ public class QmControllerAgentAgency {
         if (null != qmControllerAgent) {
             qmControllerAgent.afterReturning(jp, result, time);
         }
-        if (AgentConfiguration.log) {
-            LOG.debug("※※※执行结果:{}", result);
+        if (AgentConfiguration.isLog()) {
+            LOG.debug("※ Execute result {} ※", result);
             time = System.currentTimeMillis() - starTime;
-            LOG.info("※※※执行耗时：{}/ms", time);
+            LOG.info("※ Execute time {}/ms ※", time);
         }
     }
 

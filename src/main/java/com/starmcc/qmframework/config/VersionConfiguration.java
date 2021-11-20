@@ -8,12 +8,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @version 2019/8/29 17:49
  * 版本配置
  */
-@ConfigurationProperties(prefix = "qmframework.version", ignoreUnknownFields = false)
+@ConfigurationProperties("qmframework.version")
 public class VersionConfiguration {
 
-    public static boolean start;
-    public static String now;
-    public static String[] allows;
+    private static boolean start;
+    private static String now;
+    private static String[] allows;
 
     @Value("${start:false}")
     public void setStart(boolean start) {
@@ -30,15 +30,15 @@ public class VersionConfiguration {
         VersionConfiguration.allows = allows;
     }
 
-    public boolean isStart() {
-        return VersionConfiguration.start;
+    public static boolean isStart() {
+        return start;
     }
 
-    public String getNow() {
-        return VersionConfiguration.now;
+    public static String getNow() {
+        return now;
     }
 
-    public String[] getAllows() {
-        return VersionConfiguration.allows;
+    public static String[] getAllows() {
+        return allows;
     }
 }

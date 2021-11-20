@@ -25,12 +25,18 @@ public class QmHttpClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(QmHttpClient.class);
 
-    private final static String POST = "POST";
-    private final static String GET = "GET";
     /**
-     * 字符编码
+     * POST
      */
-    private final static String ENCODING_UTF_8 = "UTF-8";
+    public final static String POST = "POST";
+    /**
+     * GET
+     */
+    public final static String GET = "GET";
+    /**
+     * 默认字符编码
+     */
+    public final static String ENCODING_UTF_8 = "UTF-8";
 
 
     /**

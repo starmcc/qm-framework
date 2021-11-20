@@ -1,4 +1,4 @@
-package com.starmcc.qmframework.config;
+package com.starmcc.qmframework.cros;
 
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

@@ -76,18 +76,18 @@ public class QmRequestWrapper extends HttpServletRequestWrapper {
         if (StringUtils.isBlank(body)) {
             return "";
         }
-        if (StringUtils.isNotBlank(TransmitConfiguration.requestKey)) {
+        if (StringUtils.isNotBlank(TransmitConfiguration.getRequestKey())) {
             JSONObject jsonObject = JSONObject.parseObject(body);
-            body = jsonObject.getString(TransmitConfiguration.requestKey);
+            body = jsonObject.getString(TransmitConfiguration.getRequestKey());
             if (StringUtils.isBlank(body)) {
                 return "";
             }
         }
-        if (AesConfiguration.start) {
+        if (AesConfiguration.isStart()) {
             try {
                 body = QmAesUtil.decryptAes(body);
             } catch (Exception e) {
-                LOG.error("解密异常: {}", e);
+                LOG.error("Decryption abnormal {}", e.getMessage(), e);
                 return null;
             }
         }
@@ -112,20 +112,20 @@ public class QmRequestWrapper extends HttpServletRequestWrapper {
                 sb.append(line);
             }
         } catch (IOException e) {
-            LOG.error("IOException异常: {}", e);
+            LOG.error("IOException {}", e.getMessage(), e);
         } finally {
             if (Objects.nonNull(inputStream)) {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
-                    LOG.error("IOException异常: {}", e);
+                    LOG.error("IOException {}", e.getMessage(), e);
                 }
             }
             if (Objects.nonNull(reader)) {
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    LOG.error("IOException异常: {}", e);
+                    LOG.error("IOException {}", e.getMessage(), e);
                 }
             }
         }

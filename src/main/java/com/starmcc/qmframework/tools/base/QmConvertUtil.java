@@ -1,6 +1,6 @@
 package com.starmcc.qmframework.tools.base;
 
-import com.starmcc.qmframework.exception.QmFrameException;
+import com.starmcc.qmframework.exception.QmFrameworkException;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -47,15 +47,15 @@ public class QmConvertUtil {
             }
             return obj;
         } catch (IntrospectionException e) {
-            throw new QmFrameException("IntrospectionException 分析类属性失败!", e);
+            throw new QmFrameworkException("IntrospectionException Failed to analyze class attributes!", e);
         } catch (InstantiationException e) {
-            throw new QmFrameException("IllegalAccessException 实例化 JavaBean 失败!", e);
+            throw new QmFrameworkException("IllegalAccessException Failed to instantiate the JavaBean!", e);
         } catch (IllegalAccessException e) {
-            throw new QmFrameException("IllegalAccessException 实例化 JavaBean 失败!", e);
+            throw new QmFrameworkException("IllegalAccessException Failed to instantiate the JavaBean!", e);
         } catch (InvocationTargetException e) {
-            throw new QmFrameException("InvocationTargetException 调用属性的 setter 方法失败!", e);
+            throw new QmFrameworkException("InvocationTargetException Failed to call the setter method for the property!", e);
         } catch (Exception e) {
-            throw new QmFrameException("其他异常", e);
+            throw new QmFrameworkException("Exception", e);
         }
     }
 
@@ -105,13 +105,13 @@ public class QmConvertUtil {
             }
             return returnMap;
         } catch (IntrospectionException e) {
-            throw new QmFrameException("IntrospectionException 分析类属性失败!", e);
+            throw new QmFrameworkException("IntrospectionException Failed to analyze class attributes!", e);
         } catch (IllegalAccessException e) {
-            throw new QmFrameException("IllegalAccessException 实例化 JavaBean 失败!", e);
+            throw new QmFrameworkException("IllegalAccessException Failed to instantiate the JavaBean!", e);
         } catch (InvocationTargetException e) {
-            throw new QmFrameException("InvocationTargetException 调用属性的 setter 方法失败!", e);
+            throw new QmFrameworkException("InvocationTargetException Failed to call the setter method for the property!", e);
         } catch (Exception e) {
-            throw new QmFrameException("其他异常", e);
+            throw new QmFrameworkException("Exception", e);
         }
     }
 

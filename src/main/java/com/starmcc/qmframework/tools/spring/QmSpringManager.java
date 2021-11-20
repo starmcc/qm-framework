@@ -3,8 +3,11 @@ package com.starmcc.qmframework.tools.spring;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.util.AntPathMatcher;
 
 /**
@@ -21,7 +24,7 @@ public class QmSpringManager implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         if (null == QmSpringManager.applicationContext) {
             QmSpringManager.applicationContext = applicationContext;
-            LOG.info("※※※※※※QmSpringManager注入ApplicationContext成功※※※※※※");
+            LOG.info("※ QmSpringManager add applicationContext ※");
         }
     }
 
@@ -74,5 +77,22 @@ public class QmSpringManager implements ApplicationContextAware {
      */
     public static boolean verifyMatchURI(String matchingUrl, String requestUrl) {
         return new AntPathMatcher().match(matchingUrl, requestUrl);
+    }
+
+    /**
+     * 动态注入bean
+     *
+     * @param requiredType 注入类
+     * @param beanName     bean名称
+     */
+    public static void registerBean(Class<?> requiredType, String beanName) {
+        //将applicationContext转换为ConfigurableApplicationContext
+        ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) applicationContext;
+        //获取BeanFactory
+        DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) configurableApplicationContext.getAutowireCapableBeanFactory();
+        //创建bean信息.
+        BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(requiredType);
+        //动态注册bean.
+        defaultListableBeanFactory.registerBeanDefinition(beanName, beanDefinitionBuilder.getBeanDefinition());
     }
 }

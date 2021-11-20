@@ -7,6 +7,8 @@ package com.starmcc.qmframework.exception;
  */
 public class QmParamErrorException extends RuntimeException {
 
+    private static final long serialVersionUID = 3560548224601970240L;
+
     public QmParamErrorException(String message) {
         super(String.format("required param {%s} is error", message));
     }

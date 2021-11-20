@@ -7,8 +7,12 @@ import org.slf4j.LoggerFactory;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Date;
 
@@ -20,39 +24,28 @@ public class QmAesUtil {
 
     private static final Logger LOG = LoggerFactory.getLogger(QmAesUtil.class);
 
+
     /**
      * 加密封装(使用配置的key和次数)
      *
-     * @param data 加密数据
-     * @return Returns the specified data according to the method
-     * @throws Exception
+     * @param data 数据
+     * @return {@link String}
+     * @throws Exception 异常
      */
     public static String encryptAes(String data) throws Exception {
-        Date date = new Date();
-        String str = data;
-        for (int i = 0; i < AesConfiguration.number; i++) {
-            str = encryptAes(str, AesConfiguration.key);
-        }
-        LOG.debug("加密用时：" + (System.currentTimeMillis() - date.getTime()));
-        return str;
+        return encryptAes(data, AesConfiguration.getNumber(), AesConfiguration.getKey());
     }
 
 
     /**
      * 解密封装(使用配置的key和次数)
      *
-     * @param data 密文
-     * @return Returns the specified data according to the method
-     * @throws Exception
+     * @param data 秘文
+     * @return {@link String}
+     * @throws Exception 异常
      */
     public static String decryptAes(String data) throws Exception {
-        Date date = new Date();
-        String str = data;
-        for (int i = 0; i < AesConfiguration.number; i++) {
-            str = decryptAes(str, AesConfiguration.key);
-        }
-        LOG.debug("解密用时：" + (System.currentTimeMillis() - date.getTime()));
-        return str;
+        return decryptAes(data, AesConfiguration.getNumber(), AesConfiguration.getKey());
     }
 
     /**
@@ -65,79 +58,82 @@ public class QmAesUtil {
      * @throws Exception
      */
     public static String encryptAes(String data, int num, String key) throws Exception {
-        Date date = new Date();
-        String str = data;
+        final Date date = new Date();
         for (int i = 0; i < num; i++) {
-            str = encryptAes(str, key);
+            data = encryptAes(data, key);
         }
-        LOG.debug("加密用时：" + (System.currentTimeMillis() - date.getTime()));
-        return str;
+        LOG.debug("EncryptAes Elapsed Time {}", (System.currentTimeMillis() - date.getTime()));
+        return data;
     }
 
+
     /**
-     * 解密封装
+     * 解密aes
      *
-     * @param data 密文
-     * @param num  解密次数
+     * @param data 数据
+     * @param num  加密次数
      * @param key  秘钥
-     * @return Returns the specified data according to the method
-     * @throws Exception
+     * @return {@link String}
+     * @throws Exception 异常
      */
     public static String decryptAes(String data, int num, String key) throws Exception {
-        Date date = new Date();
-        String str = data;
+        final Date date = new Date();
         for (int i = 0; i < num; i++) {
-            str = decryptAes(str, key);
+            data = decryptAes(data, key);
         }
-        LOG.debug("解密用时：" + (System.currentTimeMillis() - date.getTime()));
-        return str;
+        LOG.debug("DecryptAes Elapsed Time {}", (System.currentTimeMillis() - date.getTime()));
+        return data;
     }
 
 
     /**
-     * 加密
+     * aes加密
      *
-     * @param data
-     * @param key
-     * @return Returns the specified data according to the method
-     * @throws Exception
+     * @param data 数据
+     * @param key  秘钥
+     * @return {@link String}
+     * @throws Exception 异常
      */
     private static String encryptAes(String data, String key) throws Exception {
-        KeyGenerator kgen = KeyGenerator.getInstance("AES");
-        SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
-        secureRandom.setSeed(key.getBytes(AesConfiguration.encoding));
-        kgen.init(128, secureRandom);
-        SecretKey skey = kgen.generateKey();
-        byte[] raw = skey.getEncoded();
-        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
-        byte[] encryptedData = cipher.doFinal(data.getBytes(AesConfiguration.encoding));
-        String hexStr = Base64.encodeBase64String(encryptedData);
-        return hexStr;
+        byte[] encryptedData = getCipher(key).doFinal(data.getBytes(AesConfiguration.getEncoding()));
+        return Base64.encodeBase64String(encryptedData);
+    }
+
+
+    /**
+     * 解密aes
+     *
+     * @param data 数据
+     * @param key  秘钥
+     * @return {@link String}
+     * @throws Exception 异常
+     */
+    private static String decryptAes(String data, String key) throws Exception {
+        byte[] decryptedData = getCipher(key).doFinal(Base64.decodeBase64(data));
+        return new String(decryptedData, AesConfiguration.getEncoding());
     }
 
     /**
-     * 解密
+     * 得到密码器
      *
-     * @param data
-     * @param key
-     * @return Returns the specified data according to the method
-     * @throws Exception
+     * @param key 关键
+     * @return {@link Cipher}
+     * @throws NoSuchAlgorithmException     没有这样的算法异常
+     * @throws UnsupportedEncodingException 不支持的编码异常
+     * @throws NoSuchPaddingException       没有这样的填充例外
+     * @throws InvalidKeyException          无效的关键例外
      */
-    private static String decryptAes(String data, String key) throws Exception {
+    private static Cipher getCipher(String key) throws NoSuchAlgorithmException, UnsupportedEncodingException, NoSuchPaddingException, InvalidKeyException {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
         SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
-        secureRandom.setSeed(key.getBytes(AesConfiguration.encoding));
+        secureRandom.setSeed(key.getBytes(AesConfiguration.getEncoding()));
         kgen.init(128, secureRandom);
         SecretKey skey = kgen.generateKey();
         byte[] raw = skey.getEncoded();
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(Cipher.DECRYPT_MODE, skeySpec);
-        byte[] decryptedData = cipher.doFinal(Base64.decodeBase64(data));
-        String respStr = new String(decryptedData, AesConfiguration.encoding);
-        return respStr;
+        return cipher;
     }
 
 

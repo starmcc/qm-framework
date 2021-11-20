@@ -4,17 +4,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
+ * aes配置
+ *
  * @author starmcc
- * @version 2019/8/29 17:52
- * AES配置
+ * @date 2021/11/20
  */
-@ConfigurationProperties(prefix = "qmframework.aes", ignoreUnknownFields = false)
+@ConfigurationProperties("qmframework.aes")
 public class AesConfiguration {
 
-    public static boolean start;
-    public static String key;
-    public static String encoding;
-    public static int number;
+    private static boolean start;
+    private static String key;
+    private static String encoding;
+    private static int number;
 
     @Value("${start:false}")
     public void setStart(boolean start) {
@@ -36,19 +37,19 @@ public class AesConfiguration {
         AesConfiguration.number = number;
     }
 
-    public boolean isStart() {
-        return AesConfiguration.start;
+    public static boolean isStart() {
+        return start;
     }
 
-    public String getKey() {
-        return AesConfiguration.key;
+    public static String getKey() {
+        return key;
     }
 
-    public String getEncoding() {
-        return AesConfiguration.encoding;
+    public static String getEncoding() {
+        return encoding;
     }
 
-    public int getNumber() {
-        return AesConfiguration.number;
+    public static int getNumber() {
+        return number;
     }
 }

@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -25,17 +24,10 @@ import java.util.List;
  * @author starmcc
  * @version 2018年11月24日 上午1:33:11
  * QmFramework 核心组合配置类
- * 请在标注了@SpringBootApplication启动类中继承它。
  */
-@Import({TransmitConfiguration.class,
-        VersionConfiguration.class,
-        SpecialConfiguration.class,
-        AesConfiguration.class,
-        AgentConfiguration.class,
-})
-public class QmFrameworkApplication implements WebMvcConfigurer {
+public class QmFrameworkConfiguration implements WebMvcConfigurer {
 
-    private static final Logger LOG = LoggerFactory.getLogger(QmFrameworkApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(QmFrameworkConfiguration.class);
 
     private static final String GIT_HUB_URL = "https://github.com/starmcc/qm-framework";
 
@@ -52,8 +44,8 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
      */
     @PreDestroy
     private final void preDestroy() {
-        LOG.info("※※※※※※※※※※※※服务已停止※※※※※※※※※※※※");
-        LOG.info("浅梦GitHub:{}", GIT_HUB_URL);
+        LOG.info("※ Service stopped ※");
+        LOG.info("浅梦GitHub {}", GIT_HUB_URL);
     }
 
     /**
@@ -86,7 +78,7 @@ public class QmFrameworkApplication implements WebMvcConfigurer {
     }
 
     /**
-     * 配置消息转换器--这里我用的是alibaba fastjson
+     * 配置消息转换器--alibaba fastjson
      *
      * @param converters
      */

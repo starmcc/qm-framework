@@ -55,7 +55,7 @@ public class JsonPathArgumentResolver implements HandlerMethodArgumentResolver {
         String jsonBody = this.getRequestBody(webRequest);
         JSONObject jsonObject = JSON.parseObject(jsonBody);
         if (jsonObject == null) {
-            throw new QmParamNullException(TransmitConfiguration.requestKey);
+            throw new QmParamNullException(TransmitConfiguration.getRequestKey());
         }
         // 根据@qmBody注解value作为json解析的key
         QmBody qmBody = parameter.getParameterAnnotation(QmBody.class);

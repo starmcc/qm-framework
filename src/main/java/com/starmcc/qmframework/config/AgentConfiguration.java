@@ -8,20 +8,20 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @version 2020/9/22 16:35
  * AOP 配置
  */
-@ConfigurationProperties(prefix = "qmframework.agent", ignoreUnknownFields = false)
+@ConfigurationProperties("qmframework.agent")
 public class AgentConfiguration {
 
     /**
      * 是否打印日志
      */
-    public static boolean log;
+    private static boolean log;
 
     @Value("${log:true}")
     public void setLog(boolean log) {
         AgentConfiguration.log = log;
     }
 
-    public boolean isLog() {
-        return AgentConfiguration.log;
+    public static boolean isLog() {
+        return log;
     }
 }

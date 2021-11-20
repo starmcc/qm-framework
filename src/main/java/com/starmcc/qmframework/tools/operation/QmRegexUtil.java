@@ -1,8 +1,8 @@
 package com.starmcc.qmframework.tools.operation;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -45,15 +45,15 @@ public class QmRegexUtil {
             properties.load(inStream);
             return properties;
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            LOG.error("UnsupportedEncodingException {}", e.getMessage(), e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("IOException {}", e.getMessage(), e);
         } finally {
             if (inStream != null) {
                 try {
                     inStream.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOG.error("IOException {}", e.getMessage(), e);
                 }
             }
         }
@@ -70,7 +70,7 @@ public class QmRegexUtil {
      * @return 返回布尔类型
      */
     public static boolean isRegex(String node, String value) {
-        if (StringUtils.isEmpty(value)) {
+        if (StringUtils.isBlank(value)) {
             return false;
         }
         try {
@@ -81,13 +81,12 @@ public class QmRegexUtil {
                 regex = PRO.getProperty(node);
             }
             if (regex == null) {
-                LOG.error(String.format("%s节点读取失败！请检查properties的节点是否一致。", node));
+                LOG.error("Node read failed!Check whether the nodes of properties are the same. {}", node);
                 return false;
             }
             return Pattern.matches(regex, value);
         } catch (Exception e) {
-            e.printStackTrace();
-            LOG.error("请检查正则表达式的格式是否有误！");
+            LOG.error("Check whether the regular expression is formatted incorrectly!");
             return false;
         }
     }
