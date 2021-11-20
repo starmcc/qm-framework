@@ -188,6 +188,17 @@ public class QmRedisKeyModel implements Serializable {
             return this;
         }
 
+        public QmRedisKeyModelBuilder expands(String... expands) {
+            if (ArrayUtils.isEmpty(expands)) {
+                return this;
+            }
+            if (ArrayUtils.isEmpty(this.expands)) {
+                this.expands = new String[0];
+            }
+            this.expands = ArrayUtils.addAll(this.expands, expands);
+            return this;
+        }
+
         @Override
         public QmRedisKeyModel build() {
             return new QmRedisKeyModel(this);
