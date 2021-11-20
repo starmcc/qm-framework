@@ -45,7 +45,7 @@ public class QmRedisTemplate {
                 configuration.getHost(),
                 configuration.getPort(),
                 configuration.getTimeOut(),
-                null
+                configuration.getPassword()
         );
     }
 
