@@ -17,6 +17,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @EnableConfigurationProperties(QmRedisConfiguration.class)
-@Import(QmRedisServiceImpl.class)
+@Import({QmRedisTemplate.class, QmRedisServiceImpl.class})
 public @interface EnableQmRedisService {
 }
