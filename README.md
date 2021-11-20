@@ -36,22 +36,20 @@
 
 ## 4. Package Content
 
-4.1 Redis缓存客户端
+4.1 Redis缓存服务
 
-> 直接调用`QmRedisService`即可实现`key`、`value`的存储
+> 良好的 `QmRedisService` 优雅的使用缓存服务
 
-4.2 全局异常捕获返回JSON信息
+4.2 全局异常捕获返回 Json 信息
 
 > 在服务器发生任何错误都将返回规范化`Json`格式的字符串。
 
-4.3 重写RequestBody实现AES双向对称加密技术
+4.3 重写 RequestBody 实现自定义注解 @QmBody
 
-> 在请求时拦截，获取`body`参数并对其进行解密格式化，把格式化后的`body`原路放置。
+> 摒弃 `@RequestBody` , 在请求时对`Body`中的`Json`数据进行自动装配, 即传递Json时使用 `@QmBody` 优雅的接收参数。
 
-4.4 RequestBody自定义注解@QmBody
-
-> 在请求时对请求`Body`中的`Json`数据进行自动装配,在`Controller`中参数列表可直接获取对应类型的参数。
-
-4.5 快速拓展AOP业务场景
+4.4 快速拓展AOP业务场景
 
 > 在方法上添加`@Agent`实现对方法快速AOP代理
+
+4.5 ...有待更多发现
