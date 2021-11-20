@@ -127,7 +127,7 @@ public class QmRedisServiceImpl implements QmRedisService {
     public void lock(final QmRedisKeyModel keyModel, final QmRedisTemplate.Procedure procedure) {
         template.execute(keyModel, (jedis, key) -> {
             Long lock = jedis.setnx(keyModel.buildKey(), "lock");
-            boolean is = Objects.nonNull(lock) && lock.compareTo(1L) == 1;
+            boolean is = Objects.nonNull(lock) && lock.compareTo(1L) == 0;
             if (is) {
                 procedure.run();
             }
