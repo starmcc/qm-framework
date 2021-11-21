@@ -74,6 +74,9 @@ public class QmRedisKeyModel implements Serializable {
      */
     private String[] expands;
 
+    public static QmRedisKeyModel.QmRedisKeyModelBuilder builder() {
+        return new QmRedisKeyModel.QmRedisKeyModelBuilder();
+    }
 
     /**
      * QmRedisKey模型构造方法
@@ -205,5 +208,15 @@ public class QmRedisKeyModel implements Serializable {
         int result = Objects.hash(index, expTime, keyPrefix);
         result = 31 * result + Arrays.hashCode(expands);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "QmRedisKeyModel{" +
+                "index=" + index +
+                ", expTime=" + expTime +
+                ", keyPrefix='" + keyPrefix + '\'' +
+                ", expands=" + Arrays.toString(expands) +
+                '}';
     }
 }
