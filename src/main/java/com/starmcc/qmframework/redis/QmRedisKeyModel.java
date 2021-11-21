@@ -1,11 +1,11 @@
 package com.starmcc.qmframework.redis;
 
 import com.starmcc.qmframework.exception.QmFrameworkException;
-import javafx.util.Builder;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -74,14 +74,6 @@ public class QmRedisKeyModel implements Serializable {
      */
     private String[] expands;
 
-    private QmRedisKeyModel(QmRedisKeyModelBuilder builder) {
-        this(builder.index, builder.expTime, builder.keyPrefix, builder.expands);
-    }
-
-    public static QmRedisKeyModelBuilder builder() {
-        return new QmRedisKeyModelBuilder();
-    }
-
 
     /**
      * QmRedisKey模型构造方法
@@ -93,9 +85,9 @@ public class QmRedisKeyModel implements Serializable {
      */
     public QmRedisKeyModel(Integer index, Long expTime, String keyPrefix, String... expands) {
         this.index = Objects.isNull(index) ? 0 : index;
-        final int min_index = 0;
-        final int max_index = 15;
-        if (this.index < min_index || this.index > max_index) {
+        final int minIndex = 0;
+        final int maxIndex = 15;
+        if (this.index < minIndex || this.index > maxIndex) {
             throw new QmFrameworkException("Redis index is out of bounds!");
         }
         this.expTime = Objects.isNull(expTime) ? SECOND_PER_MINUTE : expTime;
@@ -123,12 +115,72 @@ public class QmRedisKeyModel implements Serializable {
     }
 
 
+    /**
+     * 建造者Builder
+     *
+     * @author starmcc
+     * @date 2021/11/21
+     */
+    public static class QmRedisKeyModelBuilder {
+        private Integer index;
+        private Long expTime;
+        private String keyPrefix;
+        private String[] expands;
+
+        QmRedisKeyModelBuilder() {
+
+        }
+
+        public QmRedisKeyModel.QmRedisKeyModelBuilder index(final Integer index) {
+            this.index = index;
+            return this;
+        }
+
+        public QmRedisKeyModel.QmRedisKeyModelBuilder expTime(final Long expTime) {
+            this.expTime = expTime;
+            return this;
+        }
+
+        public QmRedisKeyModel.QmRedisKeyModelBuilder keyPrefix(final String keyPrefix) {
+            this.keyPrefix = keyPrefix;
+            return this;
+        }
+
+        public QmRedisKeyModel.QmRedisKeyModelBuilder expands(final String[] expands) {
+            this.expands = expands;
+            return this;
+        }
+
+        public QmRedisKeyModel.QmRedisKeyModelBuilder expand(final String expand) {
+            if (StringUtils.isBlank(expand)) {
+                return this;
+            }
+            if (ArrayUtils.isEmpty(this.expands)) {
+                this.expands = new String[0];
+            }
+            this.expands = ArrayUtils.add(this.expands, expand);
+            return this;
+        }
+
+        public QmRedisKeyModel build() {
+            return new QmRedisKeyModel(this.index, this.expTime, this.keyPrefix, this.expands);
+        }
+    }
+
     public Integer getIndex() {
         return index;
     }
 
     public void setIndex(Integer index) {
         this.index = index;
+    }
+
+    public Long getExpTime() {
+        return expTime;
+    }
+
+    public void setExpTime(Long expTime) {
+        this.expTime = expTime;
     }
 
     public String getKeyPrefix() {
@@ -147,63 +199,11 @@ public class QmRedisKeyModel implements Serializable {
         this.expands = expands;
     }
 
-    public Long getExpTime() {
-        return expTime;
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(index, expTime, keyPrefix);
+        result = 31 * result + Arrays.hashCode(expands);
+        return result;
     }
-
-    public void setExpTime(Long expTime) {
-        this.expTime = expTime;
-    }
-
-    public static class QmRedisKeyModelBuilder implements Builder<QmRedisKeyModel> {
-
-        private Integer index;
-        private Long expTime;
-        private String keyPrefix;
-        private String[] expands;
-
-        public QmRedisKeyModelBuilder index(Integer index) {
-            this.index = index;
-            return this;
-        }
-
-        public QmRedisKeyModelBuilder expTime(Long expTime) {
-            this.expTime = expTime;
-            return this;
-        }
-
-        public QmRedisKeyModelBuilder keyPrefix(String keyPrefix) {
-            this.keyPrefix = keyPrefix;
-            return this;
-        }
-
-        public QmRedisKeyModelBuilder expand(String expand) {
-            if (StringUtils.isBlank(expand)) {
-                return this;
-            }
-            if (ArrayUtils.isEmpty(this.expands)) {
-                this.expands = new String[0];
-            }
-            this.expands = ArrayUtils.add(this.expands, expand);
-            return this;
-        }
-
-        public QmRedisKeyModelBuilder expands(String... expands) {
-            if (ArrayUtils.isEmpty(expands)) {
-                return this;
-            }
-            if (ArrayUtils.isEmpty(this.expands)) {
-                this.expands = new String[0];
-            }
-            this.expands = ArrayUtils.addAll(this.expands, expands);
-            return this;
-        }
-
-        @Override
-        public QmRedisKeyModel build() {
-            return new QmRedisKeyModel(this);
-        }
-    }
-
-
 }
