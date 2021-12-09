@@ -5,7 +5,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -55,7 +54,7 @@ public class QmRedisKeyModel implements Serializable {
     /**
      * 键的分隔符
      */
-    private static final String KEY_SEPARATOR = "$!$";
+    public static final String KEY_SEPARATOR = "$!$";
 
     /**
      * 库索引
@@ -72,7 +71,7 @@ public class QmRedisKeyModel implements Serializable {
     /**
      * 扩展参数
      */
-    private String[] expands;
+    private StringBuffer expand;
 
     public static QmRedisKeyModel.QmRedisKeyModelBuilder builder() {
         return new QmRedisKeyModel.QmRedisKeyModelBuilder();
@@ -84,9 +83,9 @@ public class QmRedisKeyModel implements Serializable {
      * @param index     库索引
      * @param expTime   有效时间
      * @param keyPrefix 键的前缀
-     * @param expands   扩展参数
+     * @param expand    扩展参数
      */
-    public QmRedisKeyModel(Integer index, Long expTime, String keyPrefix, String... expands) {
+    public QmRedisKeyModel(Integer index, Long expTime, String keyPrefix, StringBuffer expand) {
         this.index = Objects.isNull(index) ? 0 : index;
         final int minIndex = 0;
         final int maxIndex = 15;
@@ -98,7 +97,7 @@ public class QmRedisKeyModel implements Serializable {
             throw new QmFrameworkException("Cannot build an empty Redis key!");
         }
         this.keyPrefix = keyPrefix;
-        this.expands = expands;
+        this.expand = expand;
     }
 
     /**
@@ -108,13 +107,10 @@ public class QmRedisKeyModel implements Serializable {
      */
     public String buildKey() {
         StringBuffer expandKey = new StringBuffer();
-        if (ArrayUtils.isEmpty(expands)) {
+        if (Objects.isNull(expand)) {
             return this.keyPrefix;
         }
-        for (String expand : expands) {
-            expandKey.append(KEY_SEPARATOR).append(expand);
-        }
-        return this.keyPrefix + expandKey.toString();
+        return this.keyPrefix + expand.toString();
     }
 
 
@@ -128,7 +124,7 @@ public class QmRedisKeyModel implements Serializable {
         private Integer index;
         private Long expTime;
         private String keyPrefix;
-        private String[] expands;
+        private StringBuffer expand;
 
         QmRedisKeyModelBuilder() {
 
@@ -149,24 +145,21 @@ public class QmRedisKeyModel implements Serializable {
             return this;
         }
 
-        public QmRedisKeyModel.QmRedisKeyModelBuilder expands(final String[] expands) {
-            this.expands = expands;
-            return this;
-        }
-
-        public QmRedisKeyModel.QmRedisKeyModelBuilder expand(final String expand) {
-            if (StringUtils.isBlank(expand)) {
-                return this;
+        public QmRedisKeyModel.QmRedisKeyModelBuilder expands(final Object... expands) {
+            if (ArrayUtils.isNotEmpty(expands)) {
+                for (Object s : expands) {
+                    if (Objects.isNull(this.expand)) {
+                        this.expand = new StringBuffer().append(s);
+                    } else {
+                        this.expand.append(KEY_SEPARATOR).append(s);
+                    }
+                }
             }
-            if (ArrayUtils.isEmpty(this.expands)) {
-                this.expands = new String[0];
-            }
-            this.expands = ArrayUtils.add(this.expands, expand);
             return this;
         }
 
         public QmRedisKeyModel build() {
-            return new QmRedisKeyModel(this.index, this.expTime, this.keyPrefix, this.expands);
+            return new QmRedisKeyModel(this.index, this.expTime, this.keyPrefix, this.expand);
         }
     }
 
@@ -194,20 +187,12 @@ public class QmRedisKeyModel implements Serializable {
         this.keyPrefix = keyPrefix;
     }
 
-    public String[] getExpands() {
-        return expands;
+    public StringBuffer getExpand() {
+        return expand;
     }
 
-    public void setExpands(String[] expands) {
-        this.expands = expands;
-    }
-
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(index, expTime, keyPrefix);
-        result = 31 * result + Arrays.hashCode(expands);
-        return result;
+    public void setExpand(StringBuffer expand) {
+        this.expand = expand;
     }
 
     @Override
@@ -216,7 +201,7 @@ public class QmRedisKeyModel implements Serializable {
                 "index=" + index +
                 ", expTime=" + expTime +
                 ", keyPrefix='" + keyPrefix + '\'' +
-                ", expands=" + Arrays.toString(expands) +
+                ", expands=" + expand +
                 '}';
     }
 }
