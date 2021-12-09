@@ -263,7 +263,7 @@ public interface QmRedisService {
      * @param keyModel key模型
      * @return {@link Map}<{@link String}, {@link String}>
      */
-    Map<String, String> hget(final QmRedisKeyModel keyModel);
+    Map<String, String> hgetAll(final QmRedisKeyModel keyModel);
 
     /**
      * 为哈希表 key 中的指定字段的整数值加上增量 increment 。

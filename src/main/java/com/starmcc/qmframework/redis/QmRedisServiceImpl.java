@@ -225,7 +225,7 @@ public class QmRedisServiceImpl implements QmRedisService {
 
 
     @Override
-    public Map<String, String> hget(final QmRedisKeyModel keyModel) {
+    public Map<String, String> hgetAll(final QmRedisKeyModel keyModel) {
         return (Map<String, String>) template.execute(keyModel, (jedis, key) -> {
             return jedis.hgetAll(key);
         }, false);
