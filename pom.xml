@@ -7,7 +7,7 @@
     <groupId>com.starmcc</groupId>
     <artifactId>qm-framework</artifactId>
     <packaging>jar</packaging>
-    <version>3.0.0-${project.env}</version>
+    <version>3.0.1-${project.env}</version>
     <url>https://www.starmcc.com/qm-framework</url>
 
     <description>
