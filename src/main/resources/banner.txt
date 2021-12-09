@@ -1,5 +1,5 @@
 ﻿
-                                SpringBoot ${spring-boot.version}
+                      SpringBoot ${spring-boot.version}   Qm-Framework 3.0.1-SNAPSHOT
                     ______________________________________________________
             ________| Email  : starczt@163.com           Author : starmcc  |_______
             \       | Home   : https://www.starmcc.com/                    |      /
