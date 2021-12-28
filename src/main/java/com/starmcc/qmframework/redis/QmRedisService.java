@@ -119,6 +119,23 @@ public interface QmRedisService {
      */
     Long timeToLive(final QmRedisKeyModel keyModel);
 
+    /**
+     * 锁
+     *
+     * @param keyModel  key模型
+     * @param procedure 执行
+     * @return boolean
+     */
+    void lock(final QmRedisKeyModel keyModel, final QmRedisTemplate.Procedure procedure);
+
+    /**
+     * 锁
+     *
+     * @param keyModel key模型
+     * @return boolean
+     */
+    boolean lock(final QmRedisKeyModel keyModel);
+
     /*########################  string(字符串)操作  ####################*/
 
     /**
@@ -140,24 +157,6 @@ public interface QmRedisService {
      * @return {@link String}
      */
     String getSet(final QmRedisKeyModel keyModel, final String value);
-
-    /**
-     * 锁
-     *
-     * @param keyModel  key模型
-     * @param procedure 执行
-     * @return boolean
-     */
-    void lock(final QmRedisKeyModel keyModel, final QmRedisTemplate.Procedure procedure);
-
-    /**
-     * 锁
-     *
-     * @param keyModel key模型
-     * @return boolean
-     */
-    boolean lock(final QmRedisKeyModel keyModel);
-
 
     /**
      * 返回 key 所储存的字符串值的长度。

@@ -1,5 +1,6 @@
 package com.starmcc.qmframework.redis;
 
+import com.starmcc.qmframework.exception.QmRedisServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,9 +130,14 @@ public class QmRedisServiceImpl implements QmRedisService {
             Long lock = jedis.setnx(keyModel.buildKey(), "lock");
             boolean is = Objects.nonNull(lock) && lock.compareTo(1L) == 0;
             if (is) {
-                procedure.run();
-                // 执行完毕后，锁释放
-                this.del(keyModel);
+                try {
+                    procedure.run();
+                } catch (Exception e) {
+                    throw new QmRedisServiceException("Redis Service error", e);
+                } finally {
+                    // 执行完毕后，锁释放
+                    this.del(keyModel);
+                }
             }
         }, true);
     }
@@ -141,7 +147,7 @@ public class QmRedisServiceImpl implements QmRedisService {
     public boolean lock(final QmRedisKeyModel keyModel) {
         return (boolean) template.execute(keyModel, (jedis, key) -> {
             Long lock = jedis.setnx(key, "lock");
-            return Objects.nonNull(lock) && lock.compareTo(1L) == 1;
+            return Objects.nonNull(lock) && lock.compareTo(1L) == 0;
         }, true);
     }
 
