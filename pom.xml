@@ -29,7 +29,7 @@
 
     <properties>
         <httpclient.version>4.5.13</httpclient.version>
-        <fastjson.version>1.2.62</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <commons-io.version>2.7</commons-io.version>
         <commons-text.version>1.9</commons-text.version>
         <springboot.version>2.5.5</springboot.version>
